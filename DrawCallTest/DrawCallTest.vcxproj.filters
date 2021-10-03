@@ -1,0 +1,210 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="ソース ファイル">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="ヘッダー ファイル">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="リソース ファイル">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Camera">
+      <UniqueIdentifier>{90ce3f96-6d29-44b6-afd0-1f86e6e43ae5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Camera">
+      <UniqueIdentifier>{cba56f7d-4017-4e1b-988a-c058b4dcaf62}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Drawer">
+      <UniqueIdentifier>{6b606a8e-6dcc-45a8-965c-b32f8ff285dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Drawer">
+      <UniqueIdentifier>{6dd7074f-7431-4938-8430-2aa342a2abef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\RenderItem">
+      <UniqueIdentifier>{25aecd0d-4c50-4fb4-abb6-6e90e6feb2d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\RenderItem">
+      <UniqueIdentifier>{555a3981-3d3f-444a-a09a-96ec0154fb89}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Primitive">
+      <UniqueIdentifier>{fabd5f09-8adb-4904-8b92-8e79b5f53390}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Primitive">
+      <UniqueIdentifier>{8d33f900-971b-4963-94b0-1c6fee634147}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Shader">
+      <UniqueIdentifier>{8c55a26c-fb79-4fa4-9769-dc6432f99d41}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Shader">
+      <UniqueIdentifier>{300d44ef-36d3-4156-962a-7e870f023fa3}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="DrawCallTest.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="PerspectiveCamera.cpp">
+      <Filter>ソース ファイル\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraController.cpp">
+      <Filter>ソース ファイル\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="OrthoCamera.cpp">
+      <Filter>ソース ファイル\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="ICamera.cpp">
+      <Filter>ソース ファイル\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="BDB.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Mouse.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderItem.cpp">
+      <Filter>ソース ファイル\RenderItem</Filter>
+    </ClCompile>
+    <ClCompile Include="Sphere.cpp">
+      <Filter>ソース ファイル\Primitive</Filter>
+    </ClCompile>
+    <ClCompile Include="Triangle.cpp">
+      <Filter>ソース ファイル\Primitive</Filter>
+    </ClCompile>
+    <ClCompile Include="IPrimitive.cpp">
+      <Filter>ソース ファイル\Primitive</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiRenderItem.cpp">
+      <Filter>ソース ファイル\RenderItem</Filter>
+    </ClCompile>
+    <ClCompile Include="Profiler.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="DrawElementsIndirectDrawer.cpp">
+      <Filter>ソース ファイル\Drawer</Filter>
+    </ClCompile>
+    <ClCompile Include="DrawElementsInstancedDrawer.cpp">
+      <Filter>ソース ファイル\Drawer</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiDrawElementsDrawer.cpp">
+      <Filter>ソース ファイル\Drawer</Filter>
+    </ClCompile>
+    <ClCompile Include="DrawElementsDrawer.cpp">
+      <Filter>ソース ファイル\Drawer</Filter>
+    </ClCompile>
+    <ClCompile Include="SimpleShader.cpp">
+      <Filter>ソース ファイル\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="IShader.cpp">
+      <Filter>ソース ファイル\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="InstanceShader.cpp">
+      <Filter>ソース ファイル\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="ShaderUtility.cpp">
+      <Filter>ソース ファイル\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="GLBuffer.cpp">
+      <Filter>ソース ファイル\RenderItem</Filter>
+    </ClCompile>
+    <ClCompile Include="IDrawer.cpp">
+      <Filter>ソース ファイル\Drawer</Filter>
+    </ClCompile>
+    <ClCompile Include="MatrixTexture.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="pch.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="pch.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="PerspectiveCamera.h">
+      <Filter>ヘッダー ファイル\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraController.h">
+      <Filter>ヘッダー ファイル\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="OrthoCamera.h">
+      <Filter>ヘッダー ファイル\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="ICamera.h">
+      <Filter>ヘッダー ファイル\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="BDB.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Mouse.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="MouseInput.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="DrawCallTest.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderItem.h">
+      <Filter>ヘッダー ファイル\RenderItem</Filter>
+    </ClInclude>
+    <ClInclude Include="IPrimitive.h">
+      <Filter>ヘッダー ファイル\Primitive</Filter>
+    </ClInclude>
+    <ClInclude Include="Sphere.h">
+      <Filter>ヘッダー ファイル\Primitive</Filter>
+    </ClInclude>
+    <ClInclude Include="Triangle.h">
+      <Filter>ヘッダー ファイル\Primitive</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiRenderItem.h">
+      <Filter>ヘッダー ファイル\RenderItem</Filter>
+    </ClInclude>
+    <ClInclude Include="IRenderItem.h">
+      <Filter>ヘッダー ファイル\RenderItem</Filter>
+    </ClInclude>
+    <ClInclude Include="Profiler.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="IDrawer.h">
+      <Filter>ヘッダー ファイル\Drawer</Filter>
+    </ClInclude>
+    <ClInclude Include="DrawElementsIndirectDrawer.h">
+      <Filter>ヘッダー ファイル\Drawer</Filter>
+    </ClInclude>
+    <ClInclude Include="DrawElementsInstancedDrawer.h">
+      <Filter>ヘッダー ファイル\Drawer</Filter>
+    </ClInclude>
+    <ClInclude Include="DrawElementsDrawer.h">
+      <Filter>ヘッダー ファイル\Drawer</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiDrawElementsDrawer.h">
+      <Filter>ヘッダー ファイル\Drawer</Filter>
+    </ClInclude>
+    <ClInclude Include="SimpleShader.h">
+      <Filter>ヘッダー ファイル\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="IShader.h">
+      <Filter>ヘッダー ファイル\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="InstanceShader.h">
+      <Filter>ヘッダー ファイル\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="ShaderUtility.h">
+      <Filter>ヘッダー ファイル\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="GLBuffer.h">
+      <Filter>ヘッダー ファイル\RenderItem</Filter>
+    </ClInclude>
+    <ClInclude Include="MatrixTexture.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
