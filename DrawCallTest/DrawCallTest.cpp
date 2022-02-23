@@ -178,13 +178,13 @@ void DrawCallTest::Execute()
 	glfwSwapInterval(0);
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
-	int range = 5;
+	int range = 25;
 	Primitives primitives;
 	primitives.push_back(std::make_unique<Cone>(0.1f, 0.1f, 16));
 	primitives.push_back(std::make_unique<Cube>(glm::vec3(-0.1f), vec3(0.1f)));
 	primitives.push_back(std::make_unique<Cylinder>(0.1f, 0.1f, 0.1f, 16));
 	primitives.push_back(std::make_unique<Sphere>(0.1f, 16, 16));
-	primitives.push_back(std::make_unique<Torus>(0.1f, 0.2f, 16, 16));
+	primitives.push_back(std::make_unique<Torus>(0.05f, 0.1f, 16, 16));
 
 	GLuint VertexArrayID;
 	glGenVertexArrays(1, &VertexArrayID);
