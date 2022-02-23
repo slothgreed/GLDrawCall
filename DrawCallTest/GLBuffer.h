@@ -1,6 +1,5 @@
 #ifndef GL_BUFFER_H
 #define GL_BUFFER_H
-#include "IPrimitive.h"
 enum class BUFFER_TYPE
 {
 	ARRAY,

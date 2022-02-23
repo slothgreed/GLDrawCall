@@ -51,9 +51,6 @@
     <ClCompile Include="PerspectiveCamera.cpp">
       <Filter>ソース ファイル\Camera</Filter>
     </ClCompile>
-    <ClCompile Include="CameraController.cpp">
-      <Filter>ソース ファイル\Camera</Filter>
-    </ClCompile>
     <ClCompile Include="OrthoCamera.cpp">
       <Filter>ソース ファイル\Camera</Filter>
     </ClCompile>
@@ -111,9 +108,6 @@
     <ClCompile Include="ShaderUtility.cpp">
       <Filter>ソース ファイル\Shader</Filter>
     </ClCompile>
-    <ClCompile Include="GLBuffer.cpp">
-      <Filter>ソース ファイル\RenderItem</Filter>
-    </ClCompile>
     <ClCompile Include="IDrawer.cpp">
       <Filter>ソース ファイル\Drawer</Filter>
     </ClCompile>
@@ -123,15 +117,30 @@
     <ClCompile Include="pch.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="Torus.cpp">
+      <Filter>ソース ファイル\Primitive</Filter>
+    </ClCompile>
+    <ClCompile Include="Cone.cpp">
+      <Filter>ソース ファイル\Primitive</Filter>
+    </ClCompile>
+    <ClCompile Include="Cylinder.cpp">
+      <Filter>ソース ファイル\Primitive</Filter>
+    </ClCompile>
+    <ClCompile Include="Cube.cpp">
+      <Filter>ソース ファイル\Primitive</Filter>
+    </ClCompile>
+    <ClCompile Include="GLBuffer.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraController.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="PerspectiveCamera.h">
-      <Filter>ヘッダー ファイル\Camera</Filter>
-    </ClInclude>
-    <ClInclude Include="CameraController.h">
       <Filter>ヘッダー ファイル\Camera</Filter>
     </ClInclude>
     <ClInclude Include="OrthoCamera.h">
@@ -200,10 +209,25 @@
     <ClInclude Include="ShaderUtility.h">
       <Filter>ヘッダー ファイル\Shader</Filter>
     </ClInclude>
-    <ClInclude Include="GLBuffer.h">
-      <Filter>ヘッダー ファイル\RenderItem</Filter>
-    </ClInclude>
     <ClInclude Include="MatrixTexture.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Torus.h">
+      <Filter>ヘッダー ファイル\Primitive</Filter>
+    </ClInclude>
+    <ClInclude Include="Cone.h">
+      <Filter>ヘッダー ファイル\Primitive</Filter>
+    </ClInclude>
+    <ClInclude Include="Cylinder.h">
+      <Filter>ヘッダー ファイル\Primitive</Filter>
+    </ClInclude>
+    <ClInclude Include="Cube.h">
+      <Filter>ヘッダー ファイル\Primitive</Filter>
+    </ClInclude>
+    <ClInclude Include="GLBuffer.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraController.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>

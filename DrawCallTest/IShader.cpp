@@ -36,6 +36,7 @@ void IShader::Use()
 {
 	assert(m_programId != 0);
 	glUseProgram(m_programId);
+	OUTPUT_GLERROR;
 }
 void IShader::Delete()
 {

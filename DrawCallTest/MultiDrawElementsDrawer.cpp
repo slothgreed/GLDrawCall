@@ -25,8 +25,6 @@ void MultiDrawElementsDrawer::BuildRenderItem(std::shared_ptr<IPrimitive> pPrimi
 				auto primitive = pPrimitive->Clone();
 				primitive->Multi(matrix);
 				primitives[index] = primitive;
-
-				//fprintf(stdout, "%d,%d,%d\n", x, y, z);
 			}
 		}
 	}
@@ -63,19 +61,11 @@ void MultiDrawElementsDrawer::Draw(const mat4x4& proj, const mat4x4& view)
 
 		pItem->IndexBuffer()->Bind();
 
-		for (int i = 0; i < pItem->PrimitiveNum(); i++)
-		{
-			glDrawElements(pItem->GetDrawType(),
-				pItem->DrawCount()[i],
-				GL_UNSIGNED_INT,
-				pItem->DrawIndicies()[i]);
-		}
-
-		//glMultiDrawElements(pItem->GetDrawType(),
-		//	pItem->DrawCount().data(),
-		//	GL_UNSIGNED_INT,
-		//	pItem->DrawIndicies().data(),
-		//	pItem->PrimitiveNum());
+		glMultiDrawElements(pItem->GetDrawType(),
+			pItem->DrawCount().data(),
+			GL_UNSIGNED_INT,
+			pItem->DrawIndicies().data(),
+			pItem->PrimitiveNum());
 
 	}
 

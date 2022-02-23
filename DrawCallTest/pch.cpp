@@ -2,5 +2,11 @@
 
 void getError()
 {
-	GLenum error = glGetError(); if (error != 0) { assert(0); }
+#ifdef _DEBUG
+	GLenum error = glGetError();
+	if (error != 0) 
+	{
+		assert(0);
+	}
+#endif
 }

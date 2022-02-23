@@ -13,7 +13,7 @@ DrawElementsInstancedDrawer::~DrawElementsInstancedDrawer()
 void DrawElementsInstancedDrawer::BuildRenderItem(std::shared_ptr<IPrimitive> pPrimitive, int range)
 {
 	m_pRenderItem.resize(1);
-	std::vector<mat4> m_matrices(range*range*range);
+	std::vector<mat4> matrices(range*range*range);
 	for (int x = 0; x < range; x++)
 	{
 		for (int y = 0; y < range; y++)
@@ -21,17 +21,18 @@ void DrawElementsInstancedDrawer::BuildRenderItem(std::shared_ptr<IPrimitive> pP
 			for (int z = 0; z < range; z++)
 			{
 				int index = x * range * range + y * range + z;
-				m_matrices[index] = glm::translate(mat4x4(1), vec3(x, y, z));
-				//fprintf(stdout, "%d,%d,%d\n", x, y, z);
+				matrices[index] = glm::translate(mat4x4(1), vec3(x, y, z));
 			}
 		}
 	}
 	OUTPUT_GLERROR;
 
-	m_pShader->SetModels(m_matrices);
+	m_pShader->SetModels(matrices);
 	OUTPUT_GLERROR;
 	m_pRenderItem[0] = std::make_unique<RenderItem>(pPrimitive, mat4x4(1));
 	m_objectNum = range * range * range;
+
+	m_pShader->Use();
 }
 
 void DrawElementsInstancedDrawer::Draw(const mat4x4& proj, const mat4x4& view)
@@ -47,7 +48,6 @@ void DrawElementsInstancedDrawer::Draw(const mat4x4& proj, const mat4x4& view)
 	glVertexBindingDivisor(ATTRIB_MATRIX, 1);
 	OUTPUT_GLERROR;
 
-	m_pShader->Use();
 
 	m_pShader->SetViewProj(proj*view);
 	auto pItem = (RenderItem*)m_pRenderItem[0].get();

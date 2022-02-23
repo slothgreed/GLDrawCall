@@ -8,6 +8,7 @@ DrawElementsDrawer::DrawElementsDrawer()
 
 DrawElementsDrawer::~DrawElementsDrawer()
 {
+
 }
 
 void DrawElementsDrawer::BuildRenderItem(std::shared_ptr<IPrimitive> pPrimitive, int range)
@@ -26,13 +27,14 @@ void DrawElementsDrawer::BuildRenderItem(std::shared_ptr<IPrimitive> pPrimitive,
 			}
 		}
 	}
+
+	m_pShader->Use();
 }
 
 
 
 void DrawElementsDrawer::Draw(const mat4x4& proj, const mat4x4& view)
 {
-	m_pShader->Use();
 	//
 	//glVertexAttribFormat(ATTRIB_POSITION, 3, GL_FLOAT, GL_FALSE, 0);
 	//glVertexAttribFormat(ATTRIB_NORMAL, 3, GL_FLOAT, GL_FALSE, 0);

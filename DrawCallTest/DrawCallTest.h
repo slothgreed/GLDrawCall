@@ -23,6 +23,6 @@ private:
 	std::unique_ptr<CameraController> m_pCameraController;
 };
 
-static DrawCallTest* TheApp();
+static DrawCallTest* Application();
 
 #endif // DRAE_CALL_TEST_H

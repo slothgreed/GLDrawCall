@@ -11,7 +11,7 @@ class IPrimitive
 {
 public:
 	IPrimitive();
-	~IPrimitive() {};
+	virtual ~IPrimitive() {};
 
 	enum StoreType
 	{
@@ -29,6 +29,8 @@ public:
 	void Multi(const mat4x4& matrix);
 	void Convert(StoreType type);
 	std::shared_ptr<IPrimitive> Clone();
+	int GetTriangleNum();
+
 protected:
 
 	GLuint m_drawType;

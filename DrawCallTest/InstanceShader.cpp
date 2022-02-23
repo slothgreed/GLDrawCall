@@ -13,11 +13,11 @@ InstanceShader::~InstanceShader()
 
 std::string InstanceShader::GetVertexPath()
 {
-	return  "E:\\MyProgram\\KIProject\\DrawCallTest\\DrawCallTest\\Shader\\instance.vert";
+	return  "E:\\MyProgram\\KIProject\\GLDrawCall\\DrawCallTest\\Shader\\instance.vert";
 }
 std::string InstanceShader::GetFragmentPath()
 {
-	return "E:\\MyProgram\\KIProject\\DrawCallTest\\DrawCallTest\\Shader\\instance.frag";
+	return "E:\\MyProgram\\KIProject\\GLDrawCall\\DrawCallTest\\Shader\\instance.frag";
 }
 void InstanceShader::GetUniformLocation()
 {
@@ -49,8 +49,5 @@ void InstanceShader::Use()
 	glActiveTexture(GL_TEXTURE0);
 	m_pMatrixTexture->Bind();
 	glBindVertexBuffer(ATTRIB_MATRIX, m_pMatrixIndexBuffer->GetId(), 0, sizeof(int));
-
-	//m_pMatrixBuffer->Bind();
-	//m_pMatrixIndexBuffer->Bind();
-
+	OUTPUT_GLERROR;
 }

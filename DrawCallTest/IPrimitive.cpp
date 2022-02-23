@@ -83,3 +83,15 @@ std::shared_ptr<IPrimitive> IPrimitive::Clone()
 	instance->m_index = m_index;
 	return instance;
 }
+
+int IPrimitive::GetTriangleNum()
+{
+	if (m_index.size() != 0)
+	{
+		return m_index.size() / 3;
+	}
+	else
+	{
+		return m_position.size() / 3;
+	}
+}

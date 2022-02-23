@@ -5,13 +5,6 @@
 #include <iostream>
 #include <gl/glew.h>
 #include <GLFW/glfw3.h>
-#include "Sphere.h"
-#include "SimpleShader.h"
-#include "DrawElementsDrawer.h"
-#include "MultiDrawElementsDrawer.h"
-#include "DrawElementsIndirectDrawer.h"
-#include "DrawElementsInstancedDrawer.h"
-#include "Triangle.h"
 #include "Mouse.h"
 #include "MouseInput.h"
 #include "DrawCallTest.h"
@@ -20,7 +13,7 @@
 #include "Profiler.h"
 
 DrawCallTest* m_instance;
-DrawCallTest* TheApp()
+DrawCallTest* Application()
 {
 	return m_instance;
 }
@@ -29,7 +22,7 @@ void ScrollCallBack(GLFWwindow* window, double x, double y)
 	MouseInput input;
 	input.SetWheel((int)y);
 	input.SetEvent(KI_MOUSE_EVENT::MOUSE_EVENT_WHEEL);
-	TheApp()->ProcessMouseEvent(input);
+	Application()->ProcessMouseEvent(input);
 }
 
 void WindowSizeCallBack(GLFWwindow* window, int width, int height)
@@ -70,7 +63,7 @@ void CursorPosCallBack(GLFWwindow* window, double xpos, double ypos)
 		input.SetRelease(KI_MOUSE_BUTTON::MOUSE_BUTTON_RIGHT);
 	}
 
-	TheApp()->ProcessMouseEvent(input);
+	Application()->ProcessMouseEvent(input);
 }
 
 void MouseButtonCallBack(GLFWwindow* window, int button, int action, int mods)
@@ -108,7 +101,7 @@ void MouseButtonCallBack(GLFWwindow* window, int button, int action, int mods)
 		input.SetRelease(mouseButton);
 	}
 
-	TheApp()->ProcessMouseEvent(input);
+	Application()->ProcessMouseEvent(input);
 }
 
 void DrawCallTest::ProcessMouseEvent(const MouseInput& input)
@@ -169,20 +162,24 @@ void DrawCallTest::Execute()
 	glfwSwapInterval(0);
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
-	int range = 20;
-	auto primitive = std::make_shared<Sphere>(SphereArgs(glm::vec3(0), 0.1, 64, 64));
+	int range = 60;
+	//auto primitive = std::make_shared<Sphere>(glm::vec3(0), 0.1, 16, 16);
+	auto primitive = std::make_shared<Sphere>(glm::vec3(0), 0.1, 16, 16);
 	//auto primitive = std::make_shared<Triangle>();
 	//primitive->Convert(IPrimitive::StoreType::Interleave);
-
-	//DrawElementsDrawer drawer;
-	//MultiDrawElementsDrawer drawer;
-	DrawElementsInstancedDrawer drawer;
-	drawer.BuildRenderItem(primitive, range);
-	pCamera->FitToBDB(BDB(vec3(0), vec3(range, range, range)));
 
 	GLuint VertexArrayID;
 	glGenVertexArrays(1, &VertexArrayID);
 	glBindVertexArray(VertexArrayID);
+
+	//DrawElementsDrawer drawer;
+	//MultiDrawElementsDrawer drawer;
+	//DrawElementsInstancedDrawer drawer;
+	DrawElementsIndirectDrawer drawer;
+	drawer.BuildRenderItem(primitive, range);
+	pCamera->FitToBDB(BDB(vec3(0), vec3(range, range, range)));
+	
+	
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_CULL_FACE);
 	glCullFace(GL_BACK);

@@ -6,7 +6,7 @@
 class CameraController
 {
 public:
-	CameraController(std::shared_ptr<ICamera> pCamera) :m_pCamera(pCamera),m_ZoomRatio(0.1f) {};
+	CameraController(const std::shared_ptr<ICamera>& pCamera) :m_pCamera(pCamera),m_ZoomRatio(0.1f) {};
 	~CameraController() {};
 	bool Move(const Mouse& mouse);
 	bool Wheel(const Mouse&  mouse);

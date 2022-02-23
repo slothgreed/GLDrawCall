@@ -13,11 +13,11 @@ SimpleShader::~SimpleShader()
 
 std::string SimpleShader::GetVertexPath()
 {
-	return  "E:\\MyProgram\\KIProject\\DrawCallTest\\DrawCallTest\\Shader\\default.vert";
+	return  "E:\\MyProgram\\KIProject\\GLDrawCall\\DrawCallTest\\Shader\\default.vert";
 }
 std::string SimpleShader::GetFragmentPath()
 {
-	return "E:\\MyProgram\\KIProject\\DrawCallTest\\DrawCallTest\\Shader\\default.frag";
+	return "E:\\MyProgram\\KIProject\\GLDrawCall\\DrawCallTest\\Shader\\default.frag";
 }
 void SimpleShader::GetUniformLocation()
 {
