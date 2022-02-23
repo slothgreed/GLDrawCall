@@ -1,7 +1,7 @@
 #include "Sphere.h"
 
-Sphere::Sphere(const glm::vec3& _position, float _radius, int _slices, int _stacks) :
-	position(_position), radius(_radius), slices(_slices), stacks(_stacks)
+Sphere::Sphere(float _radius, int _slices, int _stacks) :
+	radius(_radius), slices(_slices), stacks(_stacks)
 {
 	using namespace glm;
 	float sliceStep = 2 * pi<float>() / slices;

@@ -10,34 +10,21 @@ DrawElementsIndirectDrawer::~DrawElementsIndirectDrawer()
 {
 }
 
-void DrawElementsIndirectDrawer::BuildRenderItem(std::shared_ptr<IPrimitive> pPrimitive, int range)
+void DrawElementsIndirectDrawer::BuildRenderItem(const Primitives& pPrimitive, std::vector<mat4x4>&& matrixs)
 {
 	m_pRenderItem.resize(1);
-	m_commands.resize(range * range * range);
+	m_commands.resize(matrixs.size());
 
-	std::vector<mat4> matrices(range * range * range);
 	std::vector<std::shared_ptr<IPrimitive>> pPrimitives(1);
 
 	int baseVertex = 0;
-	for (int x = 0; x < range; x++)
-	{
-		for (int y = 0; y < range; y++)
-		{
-			for (int z = 0; z < range; z++)
-			{
-				int index = x * range * range + y * range + z;
-				matrices[index] = glm::translate(mat4x4(1), vec3(x, y, z));
-			}
-		}
-	}
-
-	m_commands[0].vertexCount = pPrimitive->Index().size();
-	m_commands[0].instanceCount = matrices.size();
+	m_commands[0].vertexCount = pPrimitive[0]->Index().size();
+	m_commands[0].instanceCount = matrixs.size();
 	m_commands[0].firstIndex = 0;
 	m_commands[0].baseVertex = 0;
 	m_commands[0].baseInstance = 0;
 
-	pPrimitives[0] = pPrimitive;
+	pPrimitives[0] = pPrimitive[0];
 	m_pRenderItem[0] = std::make_unique<MultiRenderItem>(pPrimitives);
 
 	glCreateBuffers(1, &m_indirectBuffer);
@@ -65,7 +52,7 @@ void DrawElementsIndirectDrawer::BuildRenderItem(std::shared_ptr<IPrimitive> pPr
 	glBindVertexBuffer(ATTRIB_NORMAL, m_pRenderItem[0]->NormalBuffer()->GetId(), 0, sizeof(glm::vec3));
 	m_pRenderItem[0]->IndexBuffer()->Bind();
 
-	m_pShader->SetModels(matrices);
+	m_pShader->SetModels(matrixs);
 	m_pShader->Use();
 	OUTPUT_GLERROR;
 }

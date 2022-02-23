@@ -19,7 +19,7 @@ Cylinder::Cylinder(float _baseRad, float _topRad, float _height, int _slices)
 		float yPos = 0;
 		float zPos = sinAngle * baseRad;
 		m_position.push_back(vec3(xPos, yPos, zPos));
-		
+
 		xPos = cosAngle * topRad;
 		yPos = height;
 		zPos = sinAngle * topRad;
@@ -70,6 +70,8 @@ Cylinder::Cylinder(float _baseRad, float _topRad, float _height, int _slices)
 	m_index.push_back(k + 1);
 	m_index.push_back(3);
 	m_index.push_back(2);
+
+	CalcNormal();
 
 	m_drawType = GL_TRIANGLES;
 }

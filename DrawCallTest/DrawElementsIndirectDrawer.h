@@ -17,7 +17,7 @@ public:
 	DrawElementsIndirectDrawer();
 	~DrawElementsIndirectDrawer();
 
-	virtual void BuildRenderItem(std::shared_ptr<IPrimitive> pPrimitive, int range) override;
+	virtual void BuildRenderItem(const Primitives& pPrimitive, std::vector<mat4x4>&& matrixs) override;
 	virtual void Draw(const mat4x4& proj, const mat4x4& view) override;
 
 private:

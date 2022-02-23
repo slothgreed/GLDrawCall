@@ -46,5 +46,6 @@ Cone::Cone(float _radius, float _height, int _partition)
 		m_index.push_back(index1);
 	}
 
+	CalcNormal();
 	m_drawType = GL_TRIANGLES;
 }

@@ -5,7 +5,7 @@
 class MultiRenderItem : public IRenderItem
 {
 public:
-	MultiRenderItem(std::vector<std::shared_ptr<IPrimitive>>& pPrimitives);
+	MultiRenderItem(const Primitives& pPrimitives);
 	~MultiRenderItem();
 
 	GLint GetDrawType();
@@ -14,7 +14,7 @@ public:
 	std::vector<int>& DrawCount() { return m_drawCount; }
 	int PrimitiveNum() { return m_primitiveNum; }
 private:
-	void BuildGLBuffer(std::vector<std::shared_ptr<IPrimitive>>& pPrimitives);
+	void BuildGLBuffer(const Primitives& pPrimitives);
 
 
 	std::shared_ptr<IPrimitive> m_pPrimitive;

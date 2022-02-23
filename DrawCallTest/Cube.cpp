@@ -20,6 +20,9 @@ Cube::Cube(const vec3& min, const vec3& max)
 	AddIndex(3, 1, 2, 6, 5);
 	AddIndex(4, 2, 3, 7, 6);
 	AddIndex(5, 1, 5, 4, 0);
+
+
+	CalcNormal();
 	m_drawType = GL_TRIANGLES;
 }
 

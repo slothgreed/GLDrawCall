@@ -33,6 +33,22 @@ void IPrimitive::Multi(const mat4x4& matrix)
 	}
 }
 
+void IPrimitive::CalcNormal()
+{
+	m_normal.resize(m_position.size());
+	for (int i = 0; i < m_position.size(); i ++)
+	{
+		if (m_position[i] == vec3(0))
+		{
+			m_normal[i] = vec3(0);
+		}
+		else
+		{
+			m_normal[i] = glm::normalize(m_position[i]);
+		}
+	}
+}
+
 void IPrimitive::Convert(IPrimitive::StoreType type)
 {
 	if (m_storeType == type)

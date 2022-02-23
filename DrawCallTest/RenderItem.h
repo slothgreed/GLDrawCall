@@ -4,14 +4,9 @@
 class RenderItem : public IRenderItem
 {
 public:
-	RenderItem(std::shared_ptr<IPrimitive> pPrimitive, const mat4x4& matrix);
+	RenderItem(const std::shared_ptr<IPrimitive>& pPrimitive);
 	~RenderItem();
 
-	void SetModelMatrix(const mat4x4& value) { m_matrix = value; }
-	const mat4x4& ModelMatrix() { return m_matrix; }
-
-
-	bool IsInterleave() { return m_pPrimitive->GetStoreType() == IPrimitive::StoreType::Interleave; }
 	GLint GetDrawType();
 private:
 	void BuildGLBuffer();

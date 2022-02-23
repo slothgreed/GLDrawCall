@@ -20,6 +20,7 @@ public:
 	};
 public:
 	GLuint GetDrawType();
+	void CalcNormal(); // 適当コード
 	bool IsInterleave() { return m_storeType == StoreType::Interleave; }
 	StoreType GetStoreType() { return m_storeType; }
 	virtual std::vector<glm::vec3>& Position() { return m_position; };

@@ -1,6 +1,6 @@
 #include "MultiRenderItem.h"
 
-MultiRenderItem::MultiRenderItem(std::vector<std::shared_ptr<IPrimitive>>& pPrimitives)
+MultiRenderItem::MultiRenderItem(const Primitives& pPrimitives)
 	:m_isInterleave(false)
 {
 	BuildGLBuffer(pPrimitives);
@@ -10,53 +10,32 @@ MultiRenderItem::~MultiRenderItem()
 {
 }
 
-void MultiRenderItem::BuildGLBuffer(std::vector<std::shared_ptr<IPrimitive>>& pPrimitives)
+void MultiRenderItem::BuildGLBuffer(const Primitives& pPrimitives)
 {
 	assert(pPrimitives.size() != 0);
 	assert(pPrimitives[0]->Index().size() != 0);
 	m_primitiveNum = pPrimitives.size();
 
+	int arraySize = pPrimitives[0]->Position().size() * pPrimitives.size();
+	std::vector<glm::vec3> position(arraySize);
+	m_pPositionBuffer = std::make_unique<GLBuffer>(GL_ARRAY_BUFFER);
 
-	if (pPrimitives[0]->IsInterleave())
+	std::vector<glm::vec3> normal(arraySize);
+	m_pNormalBuffer = std::make_unique<GLBuffer>(GL_ARRAY_BUFFER);
+
+
+	for (int i = 0; i < pPrimitives.size(); i++)
 	{
-		int arraySize = pPrimitives[0]->GetVertex().size() * pPrimitives.size();
-		std::vector<Vertex> vertex(arraySize);
-		m_pVertexBuffer = std::make_unique<GLBuffer>(GL_ARRAY_BUFFER);
-
-		for (int i = 0; i < pPrimitives.size(); i++)
+		for (int j = 0; j < pPrimitives[i]->Position().size(); j++)
 		{
-			for (int j = 0; j < pPrimitives[i]->GetVertex().size(); j++)
-			{
-				int index = i * pPrimitives[i]->GetVertex().size() + j;
-				vertex[index] = pPrimitives[i]->GetVertex()[j];
-			}
+			int index = i * pPrimitives[i]->Position().size() + j;
+			position[index] = pPrimitives[i]->Position()[j];
+			normal[index] = pPrimitives[i]->Normal()[j];
 		}
-
-		m_pVertexBuffer->Build(vertex);
 	}
-	else
-	{
-		int arraySize = pPrimitives[0]->Position().size() * pPrimitives.size();
-		std::vector<glm::vec3> position(arraySize);
-		m_pPositionBuffer = std::make_unique<GLBuffer>(GL_ARRAY_BUFFER);
 
-		std::vector<glm::vec3> normal(arraySize);
-		m_pNormalBuffer = std::make_unique<GLBuffer>(GL_ARRAY_BUFFER);
-
-
-		for (int i = 0; i < pPrimitives.size(); i++)
-		{
-			for (int j = 0; j < pPrimitives[i]->Position().size(); j++)
-			{
-				int index = i * pPrimitives[i]->Position().size() + j;
-				position[index] = pPrimitives[i]->Position()[j];
-				normal[index] = pPrimitives[i]->Normal()[j];
-			}
-		}
-
-		m_pPositionBuffer->Build(position);
-		m_pNormalBuffer->Build(normal);
-	}
+	m_pPositionBuffer->Build(position);
+	m_pNormalBuffer->Build(normal);
 
 
 	int indexSize = pPrimitives[0]->Index().size() * pPrimitives.size();

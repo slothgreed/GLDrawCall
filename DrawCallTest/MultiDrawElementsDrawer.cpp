@@ -10,23 +10,15 @@ MultiDrawElementsDrawer::~MultiDrawElementsDrawer()
 {
 }
 
-void MultiDrawElementsDrawer::BuildRenderItem(std::shared_ptr<IPrimitive> pPrimitive, int range)
+void MultiDrawElementsDrawer::BuildRenderItem(const Primitives& pPrimitive, std::vector<mat4x4>&& matrixs)
 {
 	m_pRenderItem.resize(1);
-	std::vector<std::shared_ptr<IPrimitive>> primitives(range*range*range);
-	for (int x = 0; x < range; x++)
+	std::vector<std::shared_ptr<IPrimitive>> primitives(matrixs.size());
+	for (int i = 0; i < matrixs.size(); i++)
 	{
-		for (int y = 0; y < range; y++)
-		{
-			for (int z = 0; z < range; z++)
-			{
-				int index = x * range * range + y * range + z;
-				mat4x4 matrix = glm::translate(mat4x4(1), vec3(x, y, z));
-				auto primitive = pPrimitive->Clone();
-				primitive->Multi(matrix);
-				primitives[index] = primitive;
-			}
-		}
+		auto primitive = pPrimitive[0]->Clone();
+		primitive->Multi(matrixs[i]);
+		primitives[i] = primitive;
 	}
 
 	m_pRenderItem[0] = std::make_unique<MultiRenderItem>(primitives);
@@ -44,20 +36,10 @@ void MultiDrawElementsDrawer::Draw(const mat4x4& proj, const mat4x4& view)
 	{
 		auto pItem = (MultiRenderItem*)m_pRenderItem[i].get();
 
-		if (pItem->IsInterleave())
-		{
-			pItem->VertexBuffer()->Bind();
-			glVertexAttribPointer(ATTRIB_POSITION, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), NULL);
-			glVertexAttribPointer(ATTRIB_NORMAL, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (const void*)offsetof(Vertex, m_normal));
-		}
-		else
-		{
-			pItem->PositionBuffer()->Bind();
-			glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, NULL);
-
-			pItem->NormalBuffer()->Bind();
-			glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, NULL);
-		}
+		pItem->PositionBuffer()->Bind();
+		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, NULL);
+		pItem->NormalBuffer()->Bind();
+		glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, NULL);
 
 		pItem->IndexBuffer()->Bind();
 

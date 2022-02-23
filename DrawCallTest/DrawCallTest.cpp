@@ -118,6 +118,22 @@ void DrawCallTest::ProcessMouseEvent(const MouseInput& input)
 	}
 }
 
+void CreateMatrix(int range, std::vector<mat4x4>& matrices)
+{
+	matrices.resize(range * range * range);
+	for (int x = 0; x < range; x++)
+	{
+		for (int y = 0; y < range; y++)
+		{
+			for (int z = 0; z < range; z++)
+			{
+				int index = x * range * range + y * range + z;
+				matrices[index] = glm::translate(mat4x4(1), vec3(x, y, z));
+			}
+		}
+	}
+}
+
 void DrawCallTest::Execute()
 {
 	if (glfwInit() == GL_FALSE)
@@ -162,11 +178,13 @@ void DrawCallTest::Execute()
 	glfwSwapInterval(0);
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
-	int range = 60;
-	//auto primitive = std::make_shared<Sphere>(glm::vec3(0), 0.1, 16, 16);
-	auto primitive = std::make_shared<Sphere>(glm::vec3(0), 0.1, 16, 16);
-	//auto primitive = std::make_shared<Triangle>();
-	//primitive->Convert(IPrimitive::StoreType::Interleave);
+	int range = 5;
+	Primitives primitives;
+	primitives.push_back(std::make_unique<Cone>(0.1f, 0.1f, 16));
+	primitives.push_back(std::make_unique<Cube>(glm::vec3(-0.1f), vec3(0.1f)));
+	primitives.push_back(std::make_unique<Cylinder>(0.1f, 0.1f, 0.1f, 16));
+	primitives.push_back(std::make_unique<Sphere>(0.1f, 16, 16));
+	primitives.push_back(std::make_unique<Torus>(0.1f, 0.2f, 16, 16));
 
 	GLuint VertexArrayID;
 	glGenVertexArrays(1, &VertexArrayID);
@@ -175,8 +193,10 @@ void DrawCallTest::Execute()
 	//DrawElementsDrawer drawer;
 	//MultiDrawElementsDrawer drawer;
 	//DrawElementsInstancedDrawer drawer;
-	DrawElementsIndirectDrawer drawer;
-	drawer.BuildRenderItem(primitive, range);
+	DrawElementsDrawer drawer;
+	std::vector<glm::mat4x4> matrices;
+	CreateMatrix(range, matrices);
+	drawer.BuildRenderItem(primitives, std::move(matrices));
 	pCamera->FitToBDB(BDB(vec3(0), vec3(range, range, range)));
 	
 	
