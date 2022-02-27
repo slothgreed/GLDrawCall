@@ -1,4 +1,8 @@
 #include "IDrawer.h"
+IDrawer::IDrawer()
+{
+
+}
 IDrawer::IDrawer(std::unique_ptr<IShader>&& pShader) 
 	:m_pShader(std::move(pShader))
 {

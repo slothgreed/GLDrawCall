@@ -142,11 +142,11 @@ void DrawCallTest::Execute()
 		return;
 	}
 
-	glfwWindowHint(GLFW_SAMPLES, 4); // 4x アンチエイリアス
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3); // OpenGL3.3を使います。
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE); // MacOS用:必ずしも必要ではありません。
-	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE); // 古いOpenGLは使いません。
+	//glfwWindowHint(GLFW_SAMPLES, 4); // 4x アンチエイリアス
+	//glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3); // OpenGL3.3を使います。
+	//glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+	//glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE); // MacOS用:必ずしも必要ではありません。
+	//glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE); // 古いOpenGLは使いません。
 
 
 	GLFWwindow* window; // (ソースコードではこの変数はグローバルです。)
@@ -190,9 +190,10 @@ void DrawCallTest::Execute()
 	glGenVertexArrays(1, &VertexArrayID);
 	glBindVertexArray(VertexArrayID);
 
+	BeginEndDrawer drawer;
 	//DrawElementsDrawer drawer;
 	//MultiDrawElementsDrawer drawer;
-	DrawElementsInstancedDrawer drawer;
+	//DrawElementsInstancedDrawer drawer;
 	//DrawElementsIndirectDrawer drawer;
 	std::vector<glm::mat4x4> matrices;
 	CreateMatrix(range, matrices);

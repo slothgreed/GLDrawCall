@@ -15,6 +15,7 @@ using namespace glm;
 
 #include "IDrawer.h"
 
+#include "BeginEndDrawer.h"
 #include "DrawElementsDrawer.h"
 #include "DrawElementsIndirectDrawer.h"
 #include "DrawElementsInstancedDrawer.h"

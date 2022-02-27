@@ -8,6 +8,7 @@ typedef std::vector<std::shared_ptr<IPrimitive>> Primitives;
 class IDrawer
 {
 public:
+	IDrawer();
 	IDrawer(std::unique_ptr<IShader>&& pShader);
 	virtual ~IDrawer() {};
 
