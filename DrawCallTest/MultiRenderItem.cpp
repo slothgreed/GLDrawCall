@@ -1,6 +1,7 @@
 #include "MultiRenderItem.h"
 
-MultiRenderItem::MultiRenderItem(const Primitives& pPrimitives)
+MultiRenderItem::MultiRenderItem(const Primitives& pPrimitives, bool useBaseVertex)
+	:m_useBaseVertex(useBaseVertex)
 {
 	BuildGLBuffer(pPrimitives);
 }
@@ -34,14 +35,27 @@ void MultiRenderItem::BuildGLBuffer(const Primitives& pPrimitives)
 	int index = 0;
 	std::vector<int> indexArray;
 	int indexSum = 0;
-	int num = 0;
-	for (int i = 0; i < pPrimitives.size(); i++)
+	if (m_useBaseVertex)
 	{
-		for (int j = 0; j < pPrimitives[i]->Index().size(); j++) 
+		for (int i = 0; i < pPrimitives.size(); i++)
 		{
-			indexArray.push_back(pPrimitives[i]->Index()[j] + indexSum);
+			indexArray.insert(indexArray.end(), pPrimitives[i]->Index().begin(), pPrimitives[i]->Index().end());
+			m_baseVertex.push_back(indexSum);
+			indexSum += pPrimitives[i]->Position().size();
 		}
-		indexSum += pPrimitives[i]->Position().size();
+
+	}
+	else
+	{
+		int indexSum = 0;
+		for (int i = 0; i < pPrimitives.size(); i++)
+		{
+			for (int j = 0; j < pPrimitives[i]->Index().size(); j++)
+			{
+				indexArray.push_back(pPrimitives[i]->Index()[j] + indexSum);
+			}
+			indexSum += pPrimitives[i]->Position().size();
+		}
 	}
 
 	m_drawIndices.resize(pPrimitives.size());

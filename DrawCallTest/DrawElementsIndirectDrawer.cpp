@@ -24,7 +24,7 @@ void DrawElementsIndirectDrawer::BuildRenderItem(const Primitives& pPrimitives, 
 	m_commands[0].baseInstance = 0;
 
 	pPrimitive.push_back(pPrimitives[0]);
-	m_pRenderItem.push_back(std::make_unique<MultiRenderItem>(pPrimitive));
+	m_pRenderItem.push_back(std::make_unique<MultiRenderItem>(pPrimitive, false));
 
 	glCreateBuffers(1, &m_indirectBuffer);
 	glBindBuffer(GL_DRAW_INDIRECT_BUFFER, m_indirectBuffer);

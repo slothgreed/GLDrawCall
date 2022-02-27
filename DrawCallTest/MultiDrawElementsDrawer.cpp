@@ -22,7 +22,7 @@ void MultiDrawElementsDrawer::BuildRenderItem(const Primitives& pPrimitives, std
 			primitive->Multi(matrixs[num++]);
 			primitives[j] = primitive;
 		}
-		m_pRenderItem.push_back(std::make_unique<MultiRenderItem>(primitives));
+		m_pRenderItem.push_back(std::make_unique<MultiRenderItem>(primitives, true));
 	}
 
 	m_pShader->Use();
@@ -42,11 +42,24 @@ void MultiDrawElementsDrawer::Draw(const mat4x4& proj, const mat4x4& view)
 		glBindVertexBuffer(ATTRIB_POSITION, pItem->PositionBuffer()->GetId(), 0, sizeof(glm::vec3));
 		glBindVertexBuffer(ATTRIB_NORMAL, pItem->NormalBuffer()->GetId(), 0, sizeof(glm::vec3));
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, pItem->IndexBuffer()->GetId());
-		glMultiDrawElements(GL_TRIANGLES,
-			pItem->DrawCount().data(),
-			GL_UNSIGNED_INT,
-			pItem->DrawIndicies().data(),
-			pItem->PrimitiveNum());
+		if (pItem->UseBaseVertex())
+		{
+			glMultiDrawElementsBaseVertex(GL_TRIANGLES,
+				pItem->DrawCount().data(),
+				GL_UNSIGNED_INT,
+				pItem->DrawIndicies().data(),
+				pItem->PrimitiveNum(),
+				pItem->BaseVertex().data());
+		}
+		else
+		{
+			glMultiDrawElements(GL_TRIANGLES,
+				pItem->DrawCount().data(),
+				GL_UNSIGNED_INT,
+				pItem->DrawIndicies().data(),
+				pItem->PrimitiveNum());
+
+		}
 		OUTPUT_GLERROR;
 	}
 

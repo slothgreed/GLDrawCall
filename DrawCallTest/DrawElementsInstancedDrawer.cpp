@@ -41,7 +41,6 @@ void DrawElementsInstancedDrawer::BuildRenderItem(const Primitives& pPrimitives,
 	glVertexBindingDivisor(ATTRIB_MATRIX, 1);
 	OUTPUT_GLERROR;
 
-
 	glVertexAttribFormat(ATTRIB_POSITION, 3, GL_FLOAT, GL_FALSE, 0);
 	glVertexAttribFormat(ATTRIB_NORMAL, 3, GL_FLOAT, GL_FALSE, 0);
 	glVertexAttribIFormat(ATTRIB_MATRIX, 1, GL_INT, 0);
