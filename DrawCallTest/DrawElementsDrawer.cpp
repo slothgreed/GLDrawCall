@@ -46,7 +46,7 @@ void DrawElementsDrawer::Draw(const mat4x4& proj, const mat4x4& view)
 			glBindVertexBuffer(ATTRIB_POSITION, pItem->PositionBuffer()->GetId(), 0, sizeof(glm::vec3));
 			glBindVertexBuffer(ATTRIB_NORMAL, pItem->NormalBuffer()->GetId(), 0, sizeof(glm::vec3));
 			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, pItem->IndexBuffer()->GetId());
-			glDrawElements(pItem->PrimitiveType(), pItem->IndexBuffer()->Size(), GL_UNSIGNED_INT, 0);
+			glDrawElements(GL_TRIANGLES, pItem->IndexBuffer()->Size(), GL_UNSIGNED_INT, 0);
 		}
 	}
 }

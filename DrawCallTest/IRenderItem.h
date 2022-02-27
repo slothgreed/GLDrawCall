@@ -12,14 +12,12 @@ public:
 	std::unique_ptr<GLBuffer>& NormalBuffer() { return m_pNormalBuffer; }
 
 	std::unique_ptr<GLBuffer>& IndexBuffer() { return m_pIndexBuffer; }
-	GLuint PrimitiveType() { return m_drawType; }
 
 protected:
 	std::unique_ptr<GLBuffer> m_pPositionBuffer;
 	std::unique_ptr<GLBuffer> m_pNormalBuffer;
 
 	std::unique_ptr<GLBuffer> m_pIndexBuffer;
-	GLuint m_drawType;
 };
 
 #endif

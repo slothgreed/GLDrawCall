@@ -16,63 +16,47 @@ void MultiRenderItem::BuildGLBuffer(const Primitives& pPrimitives)
 	assert(pPrimitives[0]->Index().size() != 0);
 	m_primitiveNum = pPrimitives.size();
 
-	int arraySize = pPrimitives[0]->Position().size() * pPrimitives.size();
-	std::vector<glm::vec3> position(arraySize);
+	std::vector<glm::vec3> position;
 	m_pPositionBuffer = std::make_unique<GLBuffer>(GL_ARRAY_BUFFER);
 
-	std::vector<glm::vec3> normal(arraySize);
+	std::vector<glm::vec3> normal;
 	m_pNormalBuffer = std::make_unique<GLBuffer>(GL_ARRAY_BUFFER);
 
 
 	for (int i = 0; i < pPrimitives.size(); i++)
 	{
-		for (int j = 0; j < pPrimitives[i]->Position().size(); j++)
-		{
-			int index = i * pPrimitives[i]->Position().size() + j;
-			position[index] = pPrimitives[i]->Position()[j];
-			normal[index] = pPrimitives[i]->Normal()[j];
-		}
+		position.insert(position.end(), pPrimitives[i]->Position().begin(),pPrimitives[i]->Position().end());
+		normal.insert(normal.end(), pPrimitives[i]->Normal().begin(), pPrimitives[i]->Normal().end());
 	}
 
 	m_pPositionBuffer->Build(position);
 	m_pNormalBuffer->Build(normal);
 
-
-	int indexSize = pPrimitives[0]->Index().size() * pPrimitives.size();
-	std::vector<int> indexArray(indexSize);
+	int index = 0;
+	std::vector<int> indexArray;
+	int indexSum = 0;
+	int num = 0;
 	for (int i = 0; i < pPrimitives.size(); i++)
 	{
-		for (int j = 0; j < pPrimitives[i]->Index().size(); j++)
+		for (int j = 0; j < pPrimitives[i]->Index().size(); j++) 
 		{
-			int index = i * pPrimitives[i]->Index().size() + j;
-			if (pPrimitives[0]->IsInterleave())
-			{
-				indexArray[index] = pPrimitives[i]->Index()[j] + pPrimitives[i]->GetVertex().size() * i;
-			}
-			else
-			{
-				indexArray[index] = pPrimitives[i]->Index()[j] + pPrimitives[i]->Position().size() * i;
-			}
+			indexArray.push_back(pPrimitives[i]->Index()[j] + indexSum);
 		}
+		indexSum += pPrimitives[i]->Position().size();
 	}
 
 	m_drawIndices.resize(pPrimitives.size());
 	m_drawCount.resize(pPrimitives.size());
 
+	int offset = 0;
 	for (int i = 0; i < pPrimitives.size(); i++)
 	{
-		m_drawIndices[i] = (void*)(i * pPrimitives[i]->Index().size() * sizeof(unsigned int));
-		m_drawCount[i] = pPrimitives[i]->Index().size();
+		m_drawIndices[i] = (void*)(offset * sizeof(unsigned int));
+		m_drawCount[i] =  pPrimitives[i]->Index().size();
+		offset += pPrimitives[i]->Index().size();
 	}
-
 
 	m_pIndexBuffer = std::make_unique<GLBuffer>(GL_ELEMENT_ARRAY_BUFFER);
 	m_pIndexBuffer->Build(indexArray);
-	m_drawType = pPrimitives[0]->GetDrawType();
-	m_isInterleave = pPrimitives[0]->GetStoreType() == IPrimitive::StoreType::Interleave;
 }
 
-GLint MultiRenderItem::GetDrawType()
-{
-	return m_drawType;
-}

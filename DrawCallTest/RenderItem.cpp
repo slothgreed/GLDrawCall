@@ -23,7 +23,6 @@ void RenderItem::BuildGLBuffer()
 	m_pIndexBuffer = std::make_unique<GLBuffer>(GL_ELEMENT_ARRAY_BUFFER);
 	m_pIndexBuffer->Build(m_pPrimitive->Index());
 
-	m_drawType = m_pPrimitive->GetDrawType();
 }
 
 GLint RenderItem::GetDrawType()

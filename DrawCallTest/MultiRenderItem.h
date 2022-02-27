@@ -5,16 +5,14 @@
 class MultiRenderItem : public IRenderItem
 {
 public:
-	MultiRenderItem(const Primitives& pPrimitives);
+	MultiRenderItem(const Primitives& pPrimitive);
 	~MultiRenderItem();
 
-	GLint GetDrawType();
-	bool IsInterleave() { return m_isInterleave; }
 	std::vector<void*>& DrawIndicies() { return m_drawIndices; }
 	std::vector<int>& DrawCount() { return m_drawCount; }
 	int PrimitiveNum() { return m_primitiveNum; }
 private:
-	void BuildGLBuffer(const Primitives& pPrimitives);
+	void BuildGLBuffer(const Primitives& pPrimitive);
 
 
 	std::shared_ptr<IPrimitive> m_pPrimitive;
@@ -22,7 +20,6 @@ private:
 	std::vector<void*> m_drawIndices;
 	std::vector<int> m_drawCount;
 
-	GLint m_drawType;
 	int m_primitiveNum;
 	bool m_isInterleave;
 

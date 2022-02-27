@@ -10,21 +10,14 @@ DrawElementsInstancedDrawer::~DrawElementsInstancedDrawer()
 {
 }
 
-void DrawElementsInstancedDrawer::BuildRenderItem(const Primitives& pPrimitive, std::vector<mat4x4>&& matrixs)
+void DrawElementsInstancedDrawer::BuildRenderItem(const Primitives& pPrimitives, std::vector<mat4x4>&& matrixs)
 {
-	m_pRenderItem.resize(1);
-
 	m_pShader->SetModels(matrixs);
 	OUTPUT_GLERROR;
-	m_pRenderItem[0] = std::make_unique<RenderItem>(pPrimitive[0]);
+	m_pRenderItem.push_back(std::make_unique<RenderItem>(pPrimitives[0]));
 	m_objectNum = matrixs.size();
 
 	m_pShader->Use();
-}
-
-void DrawElementsInstancedDrawer::Draw(const mat4x4& proj, const mat4x4& view)
-{
-	OUTPUT_GLERROR;
 	glEnableVertexAttribArray(ATTRIB_POSITION);
 	glEnableVertexAttribArray(ATTRIB_NORMAL);
 	glEnableVertexAttribArray(ATTRIB_MATRIX);
@@ -36,16 +29,21 @@ void DrawElementsInstancedDrawer::Draw(const mat4x4& proj, const mat4x4& view)
 	OUTPUT_GLERROR;
 
 
-	m_pShader->SetViewProj(proj*view);
-	auto pItem = (RenderItem*)m_pRenderItem[0].get();
 	glVertexAttribFormat(ATTRIB_POSITION, 3, GL_FLOAT, GL_FALSE, 0);
 	glVertexAttribFormat(ATTRIB_NORMAL, 3, GL_FLOAT, GL_FALSE, 0);
 	glVertexAttribIFormat(ATTRIB_MATRIX, 1, GL_INT, 0);
+}
+
+void DrawElementsInstancedDrawer::Draw(const mat4x4& proj, const mat4x4& view)
+{
+
+	m_pShader->SetViewProj(proj*view);
+	auto pItem = (RenderItem*)m_pRenderItem[0].get();
 	glBindVertexBuffer(ATTRIB_POSITION, pItem->PositionBuffer()->GetId(), 0, sizeof(glm::vec3));
 	glBindVertexBuffer(ATTRIB_NORMAL, pItem->NormalBuffer()->GetId(), 0, sizeof(glm::vec3));
 	OUTPUT_GLERROR;
 
-	pItem->IndexBuffer()->Bind();
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, pItem->IndexBuffer()->GetId());
 	glDrawElementsInstanced(pItem->GetDrawType(), pItem->IndexBuffer()->Size(), GL_UNSIGNED_INT, 0, m_objectNum);
 	OUTPUT_GLERROR;
 }

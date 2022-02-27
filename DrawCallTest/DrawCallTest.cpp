@@ -178,7 +178,7 @@ void DrawCallTest::Execute()
 	glfwSwapInterval(0);
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
-	int range = 25;
+	int range = 5;
 	Primitives primitives;
 	primitives.push_back(std::make_unique<Cone>(0.1f, 0.1f, 16));
 	primitives.push_back(std::make_unique<Cube>(glm::vec3(-0.1f), vec3(0.1f)));
@@ -190,10 +190,10 @@ void DrawCallTest::Execute()
 	glGenVertexArrays(1, &VertexArrayID);
 	glBindVertexArray(VertexArrayID);
 
-	//DrawElementsDrawer drawer;
+	DrawElementsDrawer drawer;
 	//MultiDrawElementsDrawer drawer;
 	//DrawElementsInstancedDrawer drawer;
-	DrawElementsDrawer drawer;
+	//DrawElementsIndirectDrawer drawer;
 	std::vector<glm::mat4x4> matrices;
 	CreateMatrix(range, matrices);
 	drawer.BuildRenderItem(primitives, std::move(matrices));
