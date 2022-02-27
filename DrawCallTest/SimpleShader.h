@@ -20,6 +20,7 @@ public:
 	virtual void GetUniformLocation() override;
 	virtual void SetViewProj(const mat4x4& value) override;
 	virtual void SetModel(const mat4x4& value) override;
+
 private:
 
 	GLuint m_uniform[UNIFORM::NUM];

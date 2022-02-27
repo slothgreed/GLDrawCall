@@ -26,7 +26,9 @@ void DrawElementsInstancedDrawer::BuildRenderItem(const Primitives& pPrimitives,
 
 	for (int i = 0; i < pPrimitives.size(); i++)
 	{
-		m_pRenderItem.push_back(std::make_unique<InstancedRenderItem>(pPrimitives[i], primitiveMatrix[i]));
+		auto pItem = std::make_unique<RenderItem>(pPrimitives[i]);
+		pItem->SetModels(primitiveMatrix[i]);
+		m_pRenderItem.push_back(std::move(pItem));
 	}
 
 
@@ -52,7 +54,7 @@ void DrawElementsInstancedDrawer::Draw(const mat4x4& proj, const mat4x4& view)
 	m_pShader->SetViewProj(proj*view);
 	for (int i = 0; i < m_pRenderItem.size(); i++)
 	{
-		auto pItem = (InstancedRenderItem*)m_pRenderItem[i].get();
+		auto pItem = (RenderItem*)m_pRenderItem[i].get();
 		m_pShader->SetModelBuffer(pItem->MatrixBuffer());
 		glBindVertexBuffer(ATTRIB_POSITION, pItem->PositionBuffer()->GetId(), 0, sizeof(glm::vec3));
 		glBindVertexBuffer(ATTRIB_NORMAL, pItem->NormalBuffer()->GetId(), 0, sizeof(glm::vec3));
