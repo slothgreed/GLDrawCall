@@ -12,19 +12,18 @@ DrawElementsIndirectDrawer::~DrawElementsIndirectDrawer()
 
 void DrawElementsIndirectDrawer::BuildRenderItem(const Primitives& pPrimitives, std::vector<mat4x4>&& matrixs)
 {
-	m_commands.resize(matrixs.size());
+	m_commands.resize(1);
+
+
+	m_pRenderItem.push_back(std::make_unique<MultiRenderItem>(pPrimitives, true));
 
 	std::vector<std::shared_ptr<IPrimitive>> pPrimitive;
 
-	int baseVertex = 0;
 	m_commands[0].vertexCount = pPrimitives[0]->Index().size();
 	m_commands[0].instanceCount = matrixs.size();
 	m_commands[0].firstIndex = 0;
 	m_commands[0].baseVertex = 0;
 	m_commands[0].baseInstance = 0;
-
-	pPrimitive.push_back(pPrimitives[0]);
-	m_pRenderItem.push_back(std::make_unique<MultiRenderItem>(pPrimitive, false));
 
 	glCreateBuffers(1, &m_indirectBuffer);
 	glBindBuffer(GL_DRAW_INDIRECT_BUFFER, m_indirectBuffer);
@@ -49,7 +48,7 @@ void DrawElementsIndirectDrawer::BuildRenderItem(const Primitives& pPrimitives, 
 
 	glBindVertexBuffer(ATTRIB_POSITION, m_pRenderItem[0]->PositionBuffer()->GetId(), 0, sizeof(glm::vec3));
 	glBindVertexBuffer(ATTRIB_NORMAL, m_pRenderItem[0]->NormalBuffer()->GetId(), 0, sizeof(glm::vec3));
-	m_pRenderItem[0]->IndexBuffer()->Bind();
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_pRenderItem[0]->IndexBuffer()->GetId());
 
 	//m_pShader->SetModels(matrixs);
 	m_pShader->Use();

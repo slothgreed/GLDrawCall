@@ -16,37 +16,54 @@ void MultiRenderItem::BuildGLBuffer(const Primitives& pPrimitives)
 	assert(pPrimitives[0]->Index().size() != 0);
 	m_primitiveNum = pPrimitives.size();
 
-	std::vector<glm::vec3> position;
-	m_pPositionBuffer = std::make_unique<GLBuffer>(GL_ARRAY_BUFFER);
-
-	std::vector<glm::vec3> normal;
-	m_pNormalBuffer = std::make_unique<GLBuffer>(GL_ARRAY_BUFFER);
-
-
-	for (int i = 0; i < pPrimitives.size(); i++)
 	{
-		position.insert(position.end(), pPrimitives[i]->Position().begin(),pPrimitives[i]->Position().end());
-		normal.insert(normal.end(), pPrimitives[i]->Normal().begin(), pPrimitives[i]->Normal().end());
+		
+		int positionNum = 0;
+		for (int i = 0; i < pPrimitives.size(); i++)
+		{
+			positionNum += pPrimitives[i]->Position().size();
+		}
+
+		m_pPositionBuffer = std::make_unique<GLBuffer>(GL_ARRAY_BUFFER);
+		m_pNormalBuffer = std::make_unique<GLBuffer>(GL_ARRAY_BUFFER);
+		m_pPositionBuffer->Create(positionNum, sizeof(glm::vec3));
+		m_pNormalBuffer->Create(positionNum, sizeof(glm::vec3));
+
+		int offset = 0;
+		for (int i = 0; i < pPrimitives.size(); i++)
+		{
+			m_pPositionBuffer->BufferSubData(offset, pPrimitives[i]->Position());
+			m_pNormalBuffer->BufferSubData(offset, pPrimitives[i]->Normal());
+			offset += pPrimitives[i]->Position().size();
+		}
 	}
 
-	m_pPositionBuffer->Build(position);
-	m_pNormalBuffer->Build(normal);
-
 	int index = 0;
-	std::vector<int> indexArray;
 	int indexSum = 0;
 	if (m_useBaseVertex)
 	{
+		m_pIndexBuffer = std::make_unique<GLBuffer>(GL_ELEMENT_ARRAY_BUFFER);
+
+		int indexNum = 0;
 		for (int i = 0; i < pPrimitives.size(); i++)
 		{
-			indexArray.insert(indexArray.end(), pPrimitives[i]->Index().begin(), pPrimitives[i]->Index().end());
+			indexNum += pPrimitives[i]->Index().size();
+		}
+
+		m_pIndexBuffer->Create(indexNum, sizeof(int));
+		int offset = 0;
+		for (int i = 0; i < pPrimitives.size(); i++)
+		{
+			m_pIndexBuffer->BufferSubData(offset, pPrimitives[i]->Index());
+			offset += pPrimitives[i]->Index().size();
+			
 			m_baseVertex.push_back(indexSum);
 			indexSum += pPrimitives[i]->Position().size();
 		}
-
 	}
 	else
 	{
+		std::vector<int> indexArray;
 		int indexSum = 0;
 		for (int i = 0; i < pPrimitives.size(); i++)
 		{
@@ -56,20 +73,25 @@ void MultiRenderItem::BuildGLBuffer(const Primitives& pPrimitives)
 			}
 			indexSum += pPrimitives[i]->Position().size();
 		}
+
+		m_pIndexBuffer = std::make_unique<GLBuffer>(GL_ELEMENT_ARRAY_BUFFER);
+		m_pIndexBuffer->Create(indexArray);
 	}
+
 
 	m_drawIndices.resize(pPrimitives.size());
 	m_drawCount.resize(pPrimitives.size());
 
-	int offset = 0;
-	for (int i = 0; i < pPrimitives.size(); i++)
 	{
-		m_drawIndices[i] = (void*)(offset * sizeof(unsigned int));
-		m_drawCount[i] =  pPrimitives[i]->Index().size();
-		offset += pPrimitives[i]->Index().size();
+
+		int offset = 0;
+		for (int i = 0; i < pPrimitives.size(); i++)
+		{
+			m_drawIndices[i] = (void*)(offset * sizeof(unsigned int));
+			m_drawCount[i] = pPrimitives[i]->Index().size();
+			offset += pPrimitives[i]->Index().size();
+		}
 	}
 
-	m_pIndexBuffer = std::make_unique<GLBuffer>(GL_ELEMENT_ARRAY_BUFFER);
-	m_pIndexBuffer->Build(indexArray);
 }
 

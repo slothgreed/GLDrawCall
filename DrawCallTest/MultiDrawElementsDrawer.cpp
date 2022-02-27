@@ -22,7 +22,7 @@ void MultiDrawElementsDrawer::BuildRenderItem(const Primitives& pPrimitives, std
 			primitive->Multi(matrixs[num++]);
 			primitives[j] = primitive;
 		}
-		m_pRenderItem.push_back(std::make_unique<MultiRenderItem>(primitives, true));
+		m_pRenderItem.push_back(std::make_unique<MultiRenderItem>(primitives, false));
 	}
 
 	m_pShader->Use();

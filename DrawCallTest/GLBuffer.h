@@ -14,15 +14,14 @@ public:
 
 
 	bool Created() { return m_id != 0; }
-	void Bind();
-	void UnBind();
 	void Delete();
-	void Build(const std::vector<glm::vec3>& value);
-	void Build(const std::vector<int>& value);
-	void Build(const std::vector<Vertex>& value);
+	void Create(const std::vector<glm::vec3>& value);
+	void Create(const std::vector<int>& value);
+	void Create(const std::vector<mat4x4>& value);
 
-	void NamedBufferData(const std::vector<mat4x4>& value);
-	void NamedBufferData(const std::vector<int>& value);
+	void Create(int size, int sizeofData);
+	void BufferSubData(int offset, const std::vector<int>& value);
+	void BufferSubData(int offset, const std::vector<glm::vec3>& value);
 
 	GLuint GetId() { return m_id; }
 	int Size();

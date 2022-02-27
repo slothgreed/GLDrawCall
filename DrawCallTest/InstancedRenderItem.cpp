@@ -15,12 +15,12 @@ void InstancedRenderItem::BuildGLBuffer(const std::vector<glm::mat4x4>& matrix)
 {
 	RenderItem::BuildGLBuffer();
 
-	m_pMatrixBuffer->NamedBufferData(matrix);
+	m_pMatrixBuffer->Create(matrix);
 	std::vector<int> index(matrix.size());
 	for (int i = 0; i < index.size(); i++) {
 		index[i] = i;
 	}
-	m_pMatrixIndexBuffer->NamedBufferData(index);
+	m_pMatrixIndexBuffer->Create(index);
 	m_itemNum = matrix.size();
 
 }
