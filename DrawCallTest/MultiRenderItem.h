@@ -21,7 +21,6 @@ private:
 	std::vector<int> m_drawCount;
 
 	int m_primitiveNum;
-	bool m_isInterleave;
 
 };
 

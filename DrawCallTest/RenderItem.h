@@ -7,11 +7,9 @@ public:
 	RenderItem(const std::shared_ptr<IPrimitive>& pPrimitive);
 	~RenderItem();
 
-	GLint GetDrawType();
+protected :
+		virtual void BuildGLBuffer();
 private:
-	void BuildGLBuffer();
-	mat4x4 m_matrix;
-
 	std::shared_ptr<IPrimitive> m_pPrimitive;
 };
 

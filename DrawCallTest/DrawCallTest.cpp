@@ -190,9 +190,9 @@ void DrawCallTest::Execute()
 	glGenVertexArrays(1, &VertexArrayID);
 	glBindVertexArray(VertexArrayID);
 
-	DrawElementsDrawer drawer;
+	//DrawElementsDrawer drawer;
 	//MultiDrawElementsDrawer drawer;
-	//DrawElementsInstancedDrawer drawer;
+	DrawElementsInstancedDrawer drawer;
 	//DrawElementsIndirectDrawer drawer;
 	std::vector<glm::mat4x4> matrices;
 	CreateMatrix(range, matrices);

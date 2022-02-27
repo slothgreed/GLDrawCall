@@ -170,6 +170,7 @@
     <ClCompile Include="GLBuffer.cpp" />
     <ClCompile Include="ICamera.cpp" />
     <ClCompile Include="IDrawer.cpp" />
+    <ClCompile Include="InstancedRenderItem.cpp" />
     <ClCompile Include="InstanceShader.cpp" />
     <ClCompile Include="IPrimitive.cpp" />
     <ClCompile Include="IShader.cpp" />
@@ -202,6 +203,7 @@
     <ClInclude Include="GLBuffer.h" />
     <ClInclude Include="ICamera.h" />
     <ClInclude Include="IDrawer.h" />
+    <ClInclude Include="InstancedRenderItem.h" />
     <ClInclude Include="InstanceShader.h" />
     <ClInclude Include="IPrimitive.h" />
     <ClInclude Include="IRenderItem.h" />

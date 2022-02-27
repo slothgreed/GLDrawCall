@@ -1,6 +1,8 @@
 #ifndef DRAW_ELEMENTS_INSTANCED_DRAWER_H
 #define DRAW_ELEMENTS_INSTANCED_DRAWER_H
+#include "InstancedRenderItem.h"
 #include "IDrawer.h"
+#include <vector>
 class DrawElementsInstancedDrawer : public IDrawer
 {
 public:

@@ -24,8 +24,3 @@ void RenderItem::BuildGLBuffer()
 	m_pIndexBuffer->Build(m_pPrimitive->Index());
 
 }
-
-GLint RenderItem::GetDrawType()
-{
-	return m_pPrimitive->GetDrawType();
-}

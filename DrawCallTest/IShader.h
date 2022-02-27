@@ -20,7 +20,7 @@ public:
 	virtual void GetUniformLocation() = 0;
 	virtual void SetViewProj(const mat4x4& value) = 0;
 	virtual void SetModel(const mat4x4& value) { assert(0); };
-	virtual void SetModels(const std::vector<mat4x4>& value) { assert(0); };
+	virtual void SetModelBuffer(std::unique_ptr<GLBuffer>& buffer) { assert(0); };
 protected:
 	GLuint GetId() { return m_programId; };
 private:

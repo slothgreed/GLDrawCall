@@ -8,11 +8,6 @@ class InstanceShader : public IShader
 {
 public:
 
-	enum UNIFORM
-	{
-		VIEW_PROJ,
-		NUM
-	};
 
 	InstanceShader();
 	~InstanceShader();
@@ -22,12 +17,15 @@ public:
 
 	virtual void GetUniformLocation() override;
 	virtual void SetViewProj(const mat4x4& value) override;
-	virtual void SetModels(const std::vector<mat4x4>& value) override;
-	virtual void Use() override;
+	virtual void SetModelBuffer(std::unique_ptr<GLBuffer>& buffer) override;
 private:
+	enum UNIFORM
+	{
+		VIEW_PROJ,
+		NUM
+	};
+
 	GLuint m_uniform[UNIFORM::NUM];
-	std::unique_ptr<GLBuffer> m_pMatrixBuffer;
-	std::unique_ptr<GLBuffer> m_pMatrixIndexBuffer;
 	std::unique_ptr<MatrixTexture> m_pMatrixTexture;
 };
 

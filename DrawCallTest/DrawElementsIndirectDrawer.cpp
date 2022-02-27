@@ -51,7 +51,7 @@ void DrawElementsIndirectDrawer::BuildRenderItem(const Primitives& pPrimitives, 
 	glBindVertexBuffer(ATTRIB_NORMAL, m_pRenderItem[0]->NormalBuffer()->GetId(), 0, sizeof(glm::vec3));
 	m_pRenderItem[0]->IndexBuffer()->Bind();
 
-	m_pShader->SetModels(matrixs);
+	//m_pShader->SetModels(matrixs);
 	m_pShader->Use();
 	OUTPUT_GLERROR;
 }

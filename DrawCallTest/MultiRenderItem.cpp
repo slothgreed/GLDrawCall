@@ -1,7 +1,6 @@
 #include "MultiRenderItem.h"
 
 MultiRenderItem::MultiRenderItem(const Primitives& pPrimitives)
-	:m_isInterleave(false)
 {
 	BuildGLBuffer(pPrimitives);
 }
