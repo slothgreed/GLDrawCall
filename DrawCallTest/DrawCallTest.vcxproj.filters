@@ -138,6 +138,9 @@
     <ClCompile Include="BeginEndDrawer.cpp">
       <Filter>ソース ファイル\Drawer</Filter>
     </ClCompile>
+    <ClCompile Include="IRenderItem.cpp">
+      <Filter>ソース ファイル\RenderItem</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">

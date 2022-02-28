@@ -178,7 +178,7 @@ void DrawCallTest::Execute()
 	glfwSwapInterval(0);
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
-	int range = 5;
+	int range = 50;
 	Primitives primitives;
 	primitives.push_back(std::make_unique<Cone>(0.1f, 0.1f, 16));
 	primitives.push_back(std::make_unique<Cube>(glm::vec3(-0.1f), vec3(0.1f)));

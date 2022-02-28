@@ -21,7 +21,6 @@ void GLBuffer::Create(int size, int sizeofData)
 
 void GLBuffer::Create(const std::vector<glm::vec3>& value)
 {
-	assert(m_type != 0);
 	Delete();
 	glCreateBuffers(1, &m_id);
 	glNamedBufferData(m_id, value.size() * sizeof(glm::vec3), value.data(), GL_STATIC_DRAW);
@@ -31,7 +30,6 @@ void GLBuffer::Create(const std::vector<glm::vec3>& value)
 
 void GLBuffer::Create(const std::vector<int>& value)
 {
-	assert(m_type != 0);
 	Delete();
 	glCreateBuffers(1, &m_id);
 	glNamedBufferData(m_id , value.size() * sizeof(int), value.data(), GL_STATIC_DRAW);

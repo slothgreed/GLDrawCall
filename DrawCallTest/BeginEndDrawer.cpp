@@ -30,8 +30,8 @@ void BeginEndDrawer::Draw(const mat4x4& proj, const mat4x4& view)
 		{
 			glLoadIdentity();
 			glMultMatrixf(&(m_matrix[num++][0][0]));
-			OUTPUT_GLERROR;
 			glBegin(GL_TRIANGLES);
+			OUTPUT_GLERROR;
 			for (int j = 0; j < m_pPrimitives[i]->Index().size(); j++)
 			{
 				int index = m_pPrimitives[i]->Index()[j];
@@ -41,7 +41,6 @@ void BeginEndDrawer::Draw(const mat4x4& proj, const mat4x4& view)
 				glVertex3d(pos.x, pos.y, pos.z);
 			}
 			glEnd();
-
 		}
 	}
 

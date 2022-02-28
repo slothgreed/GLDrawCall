@@ -22,12 +22,10 @@ void DrawElementsInstancedDrawer::BuildRenderItem(const Primitives& pPrimitives,
 		}
 	}
 
-	OUTPUT_GLERROR;
-
 	for (int i = 0; i < pPrimitives.size(); i++)
 	{
 		auto pItem = std::make_unique<RenderItem>(pPrimitives[i]);
-		pItem->SetModels(primitiveMatrix[i]);
+		pItem->SetMatrixs(primitiveMatrix[i]);
 		m_pRenderItem.push_back(std::move(pItem));
 	}
 

@@ -173,6 +173,7 @@
     <ClCompile Include="IDrawer.cpp" />
     <ClCompile Include="InstanceShader.cpp" />
     <ClCompile Include="IPrimitive.cpp" />
+    <ClCompile Include="IRenderItem.cpp" />
     <ClCompile Include="IShader.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Mouse.cpp" />

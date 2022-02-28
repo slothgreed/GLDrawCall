@@ -4,7 +4,7 @@
 
 struct DrawElementsIndirectCommand
 {
-	unsigned int vertexCount;
+	unsigned int count;
 	unsigned int instanceCount;
 	unsigned int firstIndex;
 	unsigned int baseVertex;
