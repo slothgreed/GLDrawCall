@@ -9,7 +9,6 @@ BeginEndDrawer::~BeginEndDrawer()
 
 void BeginEndDrawer::BuildRenderItem(const Primitives& pPrimitive, std::vector<mat4x4>&& matrixs)
 {
-
 	m_pPrimitives = pPrimitive;
 	m_matrix = std::move(matrixs);
 }

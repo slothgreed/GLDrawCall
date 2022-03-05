@@ -166,11 +166,11 @@
     <ClCompile Include="Cube.cpp" />
     <ClCompile Include="Cylinder.cpp" />
     <ClCompile Include="DrawCallTest.cpp" />
+    <ClCompile Include="DrawCommandsNVDrawer.cpp" />
     <ClCompile Include="DrawElementsIndirectDrawer.cpp" />
     <ClCompile Include="DrawElementsInstancedDrawer.cpp" />
     <ClCompile Include="GLBuffer.cpp" />
     <ClCompile Include="ICamera.cpp" />
-    <ClCompile Include="IDrawer.cpp" />
     <ClCompile Include="InstanceShader.cpp" />
     <ClCompile Include="IPrimitive.cpp" />
     <ClCompile Include="IRenderItem.cpp" />
@@ -200,6 +200,7 @@
     <ClInclude Include="Cube.h" />
     <ClInclude Include="Cylinder.h" />
     <ClInclude Include="DrawCallTest.h" />
+    <ClInclude Include="DrawCommandsNVDrawer.h" />
     <ClInclude Include="DrawElementsIndirectDrawer.h" />
     <ClInclude Include="DrawElementsInstancedDrawer.h" />
     <ClInclude Include="GLBuffer.h" />

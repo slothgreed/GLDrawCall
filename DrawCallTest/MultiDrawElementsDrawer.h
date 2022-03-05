@@ -1,6 +1,7 @@
 #ifndef MULTI_DRAW_ARRAY_DRAWER_H
 #define MULTI_DRAW_ARRAY_DRAWER_H
-
+#include "MultiRenderItem.h"
+#include "SimpleShader.h"
 #include "IDrawer.h"
 class MultiDrawElementsDrawer : public IDrawer
 {
@@ -12,6 +13,9 @@ public:
 	virtual void Draw(const mat4x4& proj, const mat4x4& view) override;
 
 private:
+	std::unique_ptr<SimpleShader> m_pShader;
+	std::vector<std::unique_ptr<MultiRenderItem>> m_pRenderItem;
+
 };
 
 

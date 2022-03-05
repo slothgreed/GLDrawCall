@@ -1,9 +1,9 @@
 #include "DrawElementsInstancedDrawer.h"
-#include "InstanceShader.h"
-#include "RenderItem.h"
+
 DrawElementsInstancedDrawer::DrawElementsInstancedDrawer()
-	:IDrawer(std::make_unique<InstanceShader>())
+	:m_pShader(std::make_unique<InstanceShader>())
 {
+	m_pShader->Build();
 }
 
 DrawElementsInstancedDrawer::~DrawElementsInstancedDrawer()
@@ -52,7 +52,7 @@ void DrawElementsInstancedDrawer::Draw(const mat4x4& proj, const mat4x4& view)
 	m_pShader->SetViewProj(proj*view);
 	for (int i = 0; i < m_pRenderItem.size(); i++)
 	{
-		auto pItem = (RenderItem*)m_pRenderItem[i].get();
+		auto& pItem = m_pRenderItem[i];
 		m_pShader->SetModelBuffer(pItem->MatrixBuffer());
 		glBindVertexBuffer(ATTRIB_POSITION, pItem->PositionBuffer()->GetId(), 0, sizeof(glm::vec3));
 		glBindVertexBuffer(ATTRIB_NORMAL, pItem->NormalBuffer()->GetId(), 0, sizeof(glm::vec3));

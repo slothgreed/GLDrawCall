@@ -1,9 +1,9 @@
 #include "MultiDrawElementsDrawer.h"
-#include "MultiRenderItem.h"
-#include "SimpleShader.h"
+
 MultiDrawElementsDrawer::MultiDrawElementsDrawer()
-	:IDrawer(std::make_unique<SimpleShader>())
+	:m_pShader(std::make_unique<SimpleShader>())
 {
+	m_pShader->Build();
 }
 
 MultiDrawElementsDrawer::~MultiDrawElementsDrawer()
@@ -38,7 +38,7 @@ void MultiDrawElementsDrawer::Draw(const mat4x4& proj, const mat4x4& view)
 	m_pShader->SetViewProj(proj*view);
 	for (int i = 0; i < m_pRenderItem.size(); i++)
 	{
-		auto pItem = (MultiRenderItem*)m_pRenderItem[i].get();
+		auto pItem = m_pRenderItem[i].get();
 		glBindVertexBuffer(ATTRIB_POSITION, pItem->PositionBuffer()->GetId(), 0, sizeof(glm::vec3));
 		glBindVertexBuffer(ATTRIB_NORMAL, pItem->NormalBuffer()->GetId(), 0, sizeof(glm::vec3));
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, pItem->IndexBuffer()->GetId());

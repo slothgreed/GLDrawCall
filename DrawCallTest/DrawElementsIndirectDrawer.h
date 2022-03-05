@@ -1,6 +1,7 @@
 #ifndef DRAW_ELEMENT_INDIRECT_DRAWER_H
 #define DRAW_ELEMENT_INDIRECT_DRAWER_H
 #include "IDrawer.h"
+#include "InstanceShader.h"
 
 struct DrawElementsIndirectCommand
 {
@@ -21,6 +22,9 @@ public:
 	virtual void Draw(const mat4x4& proj, const mat4x4& view) override;
 
 private:
+
+	std::unique_ptr<InstanceShader> m_pShader;
+
 	GLuint m_indirectBuffer;
 	std::vector<DrawElementsIndirectCommand> m_commands;
 };

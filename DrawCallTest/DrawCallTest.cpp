@@ -3,8 +3,7 @@
 
 
 #include <iostream>
-#include <gl/glew.h>
-#include <GLFW/glfw3.h>
+
 #include "Mouse.h"
 #include "MouseInput.h"
 #include "DrawCallTest.h"
@@ -190,10 +189,10 @@ void DrawCallTest::Execute()
 	glGenVertexArrays(1, &VertexArrayID);
 	glBindVertexArray(VertexArrayID);
 
-	BeginEndDrawer drawer;
+	//BeginEndDrawer drawer;
 	//DrawElementsDrawer drawer;
 	//MultiDrawElementsDrawer drawer;
-	//DrawElementsInstancedDrawer drawer;
+	DrawElementsInstancedDrawer drawer;
 	//DrawElementsIndirectDrawer drawer;
 	std::vector<glm::mat4x4> matrices;
 	CreateMatrix(range, matrices);

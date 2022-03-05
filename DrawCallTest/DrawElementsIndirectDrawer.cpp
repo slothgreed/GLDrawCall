@@ -2,8 +2,9 @@
 #include "MultiRenderItem.h"
 #include "InstanceShader.h"
 DrawElementsIndirectDrawer::DrawElementsIndirectDrawer()
-	:IDrawer(std::make_unique<InstanceShader>())
+	:m_pShader(std::make_unique<InstanceShader>())
 {
+	m_pShader->Build();
 }
 
 DrawElementsIndirectDrawer::~DrawElementsIndirectDrawer()
@@ -59,7 +60,6 @@ void DrawElementsIndirectDrawer::BuildRenderItem(const Primitives& pPrimitives, 
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, pItem->IndexBuffer()->GetId());
 
 	m_pShader->SetModelBuffer(pItem->MatrixBuffer());
-	m_pRenderItem.push_back(std::move(pItem));
 	OUTPUT_GLERROR;
 }
 

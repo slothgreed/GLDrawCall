@@ -1,9 +1,9 @@
 #include "DrawElementsDrawer.h"
-#include "RenderItem.h"
-#include "SimpleShader.h"
+
 DrawElementsDrawer::DrawElementsDrawer()
-	:IDrawer(std::make_unique<SimpleShader>())
+	:m_pShader(std::make_unique<SimpleShader>())
 {
+	m_pShader->Build();
 }
 
 DrawElementsDrawer::~DrawElementsDrawer()

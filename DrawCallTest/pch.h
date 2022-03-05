@@ -1,9 +1,8 @@
 #ifndef PCH_H
 #define PCH_H
-#include <GL\glew.h>
+#include <gl/glew.h>
 #include <GLFW/glfw3.h>
 #include <GL/GL.h>
-#include <GL/GLU.h>
 #include <glm/glm.hpp>
 #include <glm/gtx/transform.hpp>
 
