@@ -71,7 +71,7 @@ void DrawElementsIndirectDrawer::Draw(const mat4x4& proj, const mat4x4& view)
 	glBindBuffer(GL_DRAW_INDIRECT_BUFFER, m_indirectBuffer);
 
 	glMultiDrawElementsIndirect(GL_TRIANGLES, GL_UNSIGNED_INT, 0, m_commands.size(), 0);
-	
+
 	/*
 	for (int i = 0; i < m_commands.size(); i++)
 	{
@@ -80,5 +80,4 @@ void DrawElementsIndirectDrawer::Draw(const mat4x4& proj, const mat4x4& view)
 	*/
 
 	glBindBuffer(GL_DRAW_INDIRECT_BUFFER, 0);
-	OUTPUT_GLERROR;
 }

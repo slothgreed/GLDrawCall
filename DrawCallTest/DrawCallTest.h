@@ -6,20 +6,48 @@ class MouseInput;
 class ICamera;
 #include "IRenderItem.h"
 #include "CameraController.h"
+
+enum DRAWER_TYPE
+{
+	DRAWER_BEGIN_END,
+	DRAWER_DRAW_ELEMENT,
+	DRAWER_MULTI_DRAW_ELEMENT,
+	DRAWER_DRAW_ELEMENTS_INSTANCED,
+	DRAWER_DRAW_ELEMENTS_INDIRECT,
+};
+
+class TestArgs
+{
+public:
+	TestArgs(DRAWER_TYPE type, int range)
+		: m_type(type)
+		, m_range(range)
+	{
+		assert(range % 5 == 0);
+	}
+
+	DRAWER_TYPE Type() const { return m_type; }
+	int Range() const { return m_range;}
+private:
+	DRAWER_TYPE m_type;
+	int m_range;
+};
+
+
 class DrawCallTest
 {
 public:
 	DrawCallTest() {};
 	~DrawCallTest() {};
 
-	void Execute();
+	void Execute(const TestArgs& args);
 	void Finalize();
 	void ProcessMouseEvent(const MouseInput& input);
 
 private:
 	std::vector<std::unique_ptr<IRenderItem>> m_pRenderItems;
 	std::unique_ptr<Mouse> m_pMouse;
-	std::shared_ptr<ICamera> m_pCamera;
+	std::shared_ptr<PerspectiveCamera> m_pCamera;
 	std::unique_ptr<CameraController> m_pCameraController;
 };
 

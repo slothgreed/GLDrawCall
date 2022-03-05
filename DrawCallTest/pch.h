@@ -30,7 +30,7 @@ using namespace glm;
 #include "Triangle.h"
 
 
-enum KI_MOUSE_BUTTON : unsigned int
+enum MY_MOUSE_BUTTON : unsigned int
 {
 	MOUSE_BUTTON_LEFT = 1,
 	MOUSE_BUTTON_RIGHT = 2,
@@ -38,7 +38,7 @@ enum KI_MOUSE_BUTTON : unsigned int
 };
 
 
-enum KI_MOUSE_EVENT
+enum MY_MOUSE_EVENT
 {
 	MOUSE_EVENT_WHEEL,
 	MOUSE_EVENT_DOWN,

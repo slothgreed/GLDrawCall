@@ -166,11 +166,9 @@
     <ClCompile Include="Cube.cpp" />
     <ClCompile Include="Cylinder.cpp" />
     <ClCompile Include="DrawCallTest.cpp" />
-    <ClCompile Include="DrawCommandsNVDrawer.cpp" />
     <ClCompile Include="DrawElementsIndirectDrawer.cpp" />
     <ClCompile Include="DrawElementsInstancedDrawer.cpp" />
     <ClCompile Include="GLBuffer.cpp" />
-    <ClCompile Include="ICamera.cpp" />
     <ClCompile Include="InstanceShader.cpp" />
     <ClCompile Include="IPrimitive.cpp" />
     <ClCompile Include="IRenderItem.cpp" />
@@ -179,7 +177,6 @@
     <ClCompile Include="Mouse.cpp" />
     <ClCompile Include="MultiDrawElementsDrawer.cpp" />
     <ClCompile Include="MultiRenderItem.cpp" />
-    <ClCompile Include="OrthoCamera.cpp" />
     <ClCompile Include="pch.cpp" />
     <ClCompile Include="PerspectiveCamera.cpp" />
     <ClCompile Include="DrawElementsDrawer.cpp" />
@@ -200,11 +197,9 @@
     <ClInclude Include="Cube.h" />
     <ClInclude Include="Cylinder.h" />
     <ClInclude Include="DrawCallTest.h" />
-    <ClInclude Include="DrawCommandsNVDrawer.h" />
     <ClInclude Include="DrawElementsIndirectDrawer.h" />
     <ClInclude Include="DrawElementsInstancedDrawer.h" />
     <ClInclude Include="GLBuffer.h" />
-    <ClInclude Include="ICamera.h" />
     <ClInclude Include="IDrawer.h" />
     <ClInclude Include="InstanceShader.h" />
     <ClInclude Include="IPrimitive.h" />
@@ -214,7 +209,6 @@
     <ClInclude Include="MouseInput.h" />
     <ClInclude Include="MultiDrawElementsDrawer.h" />
     <ClInclude Include="MultiRenderItem.h" />
-    <ClInclude Include="OrthoCamera.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="PerspectiveCamera.h" />
     <ClInclude Include="DrawElementsDrawer.h" />

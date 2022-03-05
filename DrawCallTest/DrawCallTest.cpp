@@ -20,7 +20,7 @@ void ScrollCallBack(GLFWwindow* window, double x, double y)
 {
 	MouseInput input;
 	input.SetWheel((int)y);
-	input.SetEvent(KI_MOUSE_EVENT::MOUSE_EVENT_WHEEL);
+	input.SetEvent(MY_MOUSE_EVENT::MOUSE_EVENT_WHEEL);
 	Application()->ProcessMouseEvent(input);
 }
 
@@ -33,33 +33,33 @@ void CursorPosCallBack(GLFWwindow* window, double xpos, double ypos)
 {
 	MouseInput input;
 	input.SetPosition((float)xpos, (float)ypos);
-	input.SetEvent(KI_MOUSE_EVENT::MOUSE_EVENT_MOVE);
+	input.SetEvent(MY_MOUSE_EVENT::MOUSE_EVENT_MOVE);
 
 	if (GLFW_PRESS == glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT))
 	{
-		input.SetPress(KI_MOUSE_BUTTON::MOUSE_BUTTON_LEFT);
+		input.SetPress(MY_MOUSE_BUTTON::MOUSE_BUTTON_LEFT);
 	}
 	else
 	{
-		input.SetRelease(KI_MOUSE_BUTTON::MOUSE_BUTTON_LEFT);
+		input.SetRelease(MY_MOUSE_BUTTON::MOUSE_BUTTON_LEFT);
 	}
 
 	if (GLFW_PRESS == glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_MIDDLE))
 	{
-		input.SetPress(KI_MOUSE_BUTTON::MOUSE_BUTTON_MIDDLE);
+		input.SetPress(MY_MOUSE_BUTTON::MOUSE_BUTTON_MIDDLE);
 	}
 	else
 	{
-		input.SetRelease(KI_MOUSE_BUTTON::MOUSE_BUTTON_MIDDLE);
+		input.SetRelease(MY_MOUSE_BUTTON::MOUSE_BUTTON_MIDDLE);
 	}
 
 	if (GLFW_PRESS == glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_RIGHT))
 	{
-		input.SetPress(KI_MOUSE_BUTTON::MOUSE_BUTTON_RIGHT);
+		input.SetPress(MY_MOUSE_BUTTON::MOUSE_BUTTON_RIGHT);
 	}
 	else
 	{
-		input.SetRelease(KI_MOUSE_BUTTON::MOUSE_BUTTON_RIGHT);
+		input.SetRelease(MY_MOUSE_BUTTON::MOUSE_BUTTON_RIGHT);
 	}
 
 	Application()->ProcessMouseEvent(input);
@@ -67,7 +67,7 @@ void CursorPosCallBack(GLFWwindow* window, double xpos, double ypos)
 
 void MouseButtonCallBack(GLFWwindow* window, int button, int action, int mods)
 {
-	KI_MOUSE_BUTTON mouseButton;
+	MY_MOUSE_BUTTON mouseButton;
 	switch (button)
 	{
 	case GLFW_MOUSE_BUTTON_LEFT:
@@ -133,7 +133,7 @@ void CreateMatrix(int range, std::vector<mat4x4>& matrices)
 	}
 }
 
-void DrawCallTest::Execute()
+void DrawCallTest::Execute(const TestArgs& args)
 {
 	if (glfwInit() == GL_FALSE)
 	{
@@ -141,24 +141,13 @@ void DrawCallTest::Execute()
 		return;
 	}
 
-	//glfwWindowHint(GLFW_SAMPLES, 4); // 4x アンチエイリアス
-	//glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3); // OpenGL3.3を使います。
-	//glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-	//glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE); // MacOS用:必ずしも必要ではありません。
-	//glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE); // 古いOpenGLは使いません。
-
-
-	GLFWwindow* window; // (ソースコードではこの変数はグローバルです。)
-	window = glfwCreateWindow(1024, 768, "Tutorial 01", NULL, NULL);
+	GLFWwindow* window = glfwCreateWindow(1024, 768, "DrawCallTest", NULL, NULL);
 	if (window == NULL) {
-		fprintf(stderr, "GLFWウィンドウのオープンに失敗しました。 もしIntelのGPUならば, 3.3に対応していません。チュートリアルのバージョン2.1を試してください。n");
-		glfwTerminate();
 		return;
 	}
-	glfwMakeContextCurrent(window); // GLEWを初期化する
-	glewExperimental = true; // コアプロファイルで必要となります。
+	glfwMakeContextCurrent(window); 
+	glewExperimental = true;
 	if (glewInit() != GLEW_OK) {
-		fprintf(stderr, "GLEWの初期化に失敗しました。n");
 		return;
 	}
 
@@ -172,12 +161,12 @@ void DrawCallTest::Execute()
 	m_pCameraController = std::make_unique<CameraController>(m_pCamera);
 	glfwSetCursorPosCallback(window, CursorPosCallBack);
 	glfwSetMouseButtonCallback(window, MouseButtonCallBack);
-	glfwSetScrollCallback(window, ScrollCallBack);	// mouse wheel;
+	glfwSetScrollCallback(window, ScrollCallBack);	
 	glfwSetWindowSizeCallback(window, WindowSizeCallBack);
 	glfwSwapInterval(0);
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
-	int range = 50;
+	int range = args.Range();
 	Primitives primitives;
 	primitives.push_back(std::make_unique<Cone>(0.1f, 0.1f, 16));
 	primitives.push_back(std::make_unique<Cube>(glm::vec3(-0.1f), vec3(0.1f)));
@@ -189,14 +178,33 @@ void DrawCallTest::Execute()
 	glGenVertexArrays(1, &VertexArrayID);
 	glBindVertexArray(VertexArrayID);
 
-	//BeginEndDrawer drawer;
-	//DrawElementsDrawer drawer;
-	//MultiDrawElementsDrawer drawer;
-	DrawElementsInstancedDrawer drawer;
-	//DrawElementsIndirectDrawer drawer;
+
+	std::unique_ptr<IDrawer> drawer;
+	switch (args.Type())
+	{
+	case DRAWER_BEGIN_END:
+		drawer = std::make_unique<BeginEndDrawer>();
+		break;
+	case DRAWER_DRAW_ELEMENT:
+		drawer = std::make_unique<DrawElementsDrawer>();
+		break;
+	case DRAWER_MULTI_DRAW_ELEMENT:
+		drawer = std::make_unique<MultiDrawElementsDrawer>();
+		break;
+	case DRAWER_DRAW_ELEMENTS_INSTANCED:
+		drawer = std::make_unique<DrawElementsInstancedDrawer>();
+		break;
+	case DRAWER_DRAW_ELEMENTS_INDIRECT:
+		drawer = std::make_unique<DrawElementsIndirectDrawer>();
+		break;
+	default:
+		assert(0);
+		break;
+	}
+
 	std::vector<glm::mat4x4> matrices;
 	CreateMatrix(range, matrices);
-	drawer.BuildRenderItem(primitives, std::move(matrices));
+	drawer->BuildRenderItem(primitives, std::move(matrices));
 	pCamera->FitToBDB(BDB(vec3(0), vec3(range, range, range)));
 	
 	
@@ -210,7 +218,7 @@ void DrawCallTest::Execute()
 		profiler.Start();
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		drawer.Draw(m_pCamera->Projection(),m_pCamera->ViewMatrix());
+		drawer->Draw(m_pCamera->Projection(),m_pCamera->ViewMatrix());
 
 		profiler.Stop();
 		profiler.Output();

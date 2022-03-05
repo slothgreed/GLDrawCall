@@ -4,6 +4,34 @@ PerspectiveCamera::PerspectiveCamera()
 	m_theta = 0;
 	m_phi = 0;
 }
+void PerspectiveCamera::LookAt(const vec3& eye, const vec3& center, const vec3& up)
+{
+	m_View = glm::lookAt(eye, center, up);
+	m_eye = eye;
+	m_center = center;
+	m_up = up;
+	m_direction = glm::normalize(m_eye - m_center);
+	m_distance = glm::length(m_eye - m_center);
+}
+
+void PerspectiveCamera::SetProject(mat4x4 proj)
+{
+	m_Project = proj;
+}
+
+vec3 PerspectiveCamera::XDirection()
+{
+	return vec3(m_View[0].x, m_View[1].x, m_View[2].x);
+}
+
+vec3 PerspectiveCamera::YDirection()
+{
+	return vec3(m_View[0].y, m_View[1].y, m_View[2].y);
+}
+vec3 PerspectiveCamera::ZDirection()
+{
+	return vec3(m_View[0].z, m_View[1].z, m_View[2].z);
+}
 void PerspectiveCamera::Perspective(float fov, float aspect, float _near, float _far)
 {
 	SetProject(glm::perspective(fov, aspect, _near, _far));

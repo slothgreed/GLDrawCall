@@ -51,12 +51,6 @@
     <ClCompile Include="PerspectiveCamera.cpp">
       <Filter>ソース ファイル\Camera</Filter>
     </ClCompile>
-    <ClCompile Include="OrthoCamera.cpp">
-      <Filter>ソース ファイル\Camera</Filter>
-    </ClCompile>
-    <ClCompile Include="ICamera.cpp">
-      <Filter>ソース ファイル\Camera</Filter>
-    </ClCompile>
     <ClCompile Include="BDB.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
@@ -129,17 +123,14 @@
     <ClCompile Include="GLBuffer.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="CameraController.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="BeginEndDrawer.cpp">
       <Filter>ソース ファイル\Drawer</Filter>
     </ClCompile>
     <ClCompile Include="IRenderItem.cpp">
       <Filter>ソース ファイル\RenderItem</Filter>
     </ClCompile>
-    <ClCompile Include="DrawCommandsNVDrawer.cpp">
-      <Filter>ソース ファイル\Drawer</Filter>
+    <ClCompile Include="CameraController.cpp">
+      <Filter>ソース ファイル\Camera</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -147,12 +138,6 @@
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="PerspectiveCamera.h">
-      <Filter>ヘッダー ファイル\Camera</Filter>
-    </ClInclude>
-    <ClInclude Include="OrthoCamera.h">
-      <Filter>ヘッダー ファイル\Camera</Filter>
-    </ClInclude>
-    <ClInclude Include="ICamera.h">
       <Filter>ヘッダー ファイル\Camera</Filter>
     </ClInclude>
     <ClInclude Include="BDB.h">
@@ -233,14 +218,11 @@
     <ClInclude Include="GLBuffer.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="CameraController.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="BeginEndDrawer.h">
       <Filter>ヘッダー ファイル\Drawer</Filter>
     </ClInclude>
-    <ClInclude Include="DrawCommandsNVDrawer.h">
-      <Filter>ヘッダー ファイル\Drawer</Filter>
+    <ClInclude Include="CameraController.h">
+      <Filter>ヘッダー ファイル\Camera</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

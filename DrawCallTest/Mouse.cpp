@@ -14,19 +14,19 @@ void Mouse::ApplyMouseInput(const MouseInput& input)
 	m_event = input.Event();
 	m_wheel = input.Wheel();
 
-	if (input.Event() == KI_MOUSE_EVENT::MOUSE_EVENT_DOWN)
+	if (input.Event() == MY_MOUSE_EVENT::MOUSE_EVENT_DOWN)
 	{
 		m_before = input.Position();
 		m_current = input.Position();
 		m_drag = true;
 	}
-	else if (input.Event() == KI_MOUSE_EVENT::MOUSE_EVENT_MOVE)
+	else if (input.Event() == MY_MOUSE_EVENT::MOUSE_EVENT_MOVE)
 	{
 		m_before = m_current;
 		m_current = input.Position();
 		m_drag = false;
 	}
-	else if (input.Event() == KI_MOUSE_EVENT::MOUSE_EVENT_UP)
+	else if (input.Event() == MY_MOUSE_EVENT::MOUSE_EVENT_UP)
 	{
 		m_before.x = 0;
 		m_before.y = 0;

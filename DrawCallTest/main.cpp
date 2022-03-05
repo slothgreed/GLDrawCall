@@ -8,7 +8,7 @@ using namespace std;
 int main()
 {
 	DrawCallTest test;
-	test.Execute();
+	test.Execute(TestArgs(DRAWER_DRAW_ELEMENTS_INDIRECT, 5));
 	test.Finalize();
 	return 0;
 }
