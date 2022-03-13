@@ -5,6 +5,7 @@
 #define ATTRIB_NORMAL   1
 #define ATTRIB_MATRIX   2
 
+#include "GLBuffer.h"
 class IShader
 {
 public:

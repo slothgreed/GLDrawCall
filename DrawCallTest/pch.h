@@ -12,22 +12,6 @@
 using namespace std;
 using namespace glm;
 
-#include "IDrawer.h"
-
-#include "BeginEndDrawer.h"
-#include "DrawElementsDrawer.h"
-#include "DrawElementsIndirectDrawer.h"
-#include "DrawElementsInstancedDrawer.h"
-#include "MultiDrawElementsDrawer.h"
-
-#include "IPrimitive.h"
-
-#include "Cone.h"
-#include "Cube.h"
-#include "Cylinder.h"
-#include "Sphere.h"
-#include "Torus.h"
-#include "Triangle.h"
 
 
 enum MY_MOUSE_BUTTON : unsigned int

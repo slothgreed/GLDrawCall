@@ -1,10 +1,6 @@
 #ifndef DRAE_CALL_TEST_H
 #define	DRAE_CALL_TEST_H
 
-class Mouse;
-class MouseInput;
-class ICamera;
-#include "IRenderItem.h"
 #include "CameraController.h"
 
 enum DRAWER_TYPE
@@ -45,7 +41,6 @@ public:
 	void ProcessMouseEvent(const MouseInput& input);
 
 private:
-	std::vector<std::unique_ptr<IRenderItem>> m_pRenderItems;
 	std::unique_ptr<Mouse> m_pMouse;
 	std::shared_ptr<PerspectiveCamera> m_pCamera;
 	std::unique_ptr<CameraController> m_pCameraController;

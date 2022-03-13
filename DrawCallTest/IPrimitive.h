@@ -43,5 +43,6 @@ protected:
 	std::vector<int> m_index;
 	
 };
+typedef std::vector<std::shared_ptr<IPrimitive>> Primitives;
 
 #endif

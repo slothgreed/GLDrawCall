@@ -4,7 +4,6 @@
 #include "IRenderItem.h"
 #include "IShader.h"
 
-typedef std::vector<std::shared_ptr<IPrimitive>> Primitives;
 class IDrawer
 {
 public:

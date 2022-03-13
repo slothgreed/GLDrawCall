@@ -11,6 +11,19 @@
 #include "PerspectiveCamera.h"
 #include "Profiler.h"
 
+#include "BeginEndDrawer.h"
+#include "DrawElementsDrawer.h"
+#include "DrawElementsIndirectDrawer.h"
+#include "DrawElementsInstancedDrawer.h"
+#include "MultiDrawElementsDrawer.h"
+
+#include "Cone.h"
+#include "Cube.h"
+#include "Cylinder.h"
+#include "Sphere.h"
+#include "Torus.h"
+#include "Triangle.h"
+
 DrawCallTest* m_instance;
 DrawCallTest* Application()
 {
@@ -174,12 +187,9 @@ void DrawCallTest::Execute(const TestArgs& args)
 	primitives.push_back(std::make_unique<Sphere>(0.1f, 32, 32));
 	primitives.push_back(std::make_unique<Torus>(0.05f, 0.1f, 32, 32));
 
-
-
 	GLuint VertexArrayID;
 	glGenVertexArrays(1, &VertexArrayID);
 	glBindVertexArray(VertexArrayID);
-
 
 	std::unique_ptr<IDrawer> drawer;
 	switch (args.Type())
@@ -204,8 +214,7 @@ void DrawCallTest::Execute(const TestArgs& args)
 		break;
 	}
 
-	std::vector<glm::mat4x4> matrices;
-	CreateMatrix(range, matrices);
+
 
 	unsigned long int triangleNum = 0;
 	for (int i = 0; i < primitives.size(); i++)
@@ -215,6 +224,8 @@ void DrawCallTest::Execute(const TestArgs& args)
 	triangleNum = triangleNum * range * range * (range / 5);
 	printf("Triangle Num %lu\n", triangleNum);
 
+	std::vector<glm::mat4x4> matrices;
+	CreateMatrix(range, matrices);
 	drawer->BuildRenderItem(primitives, std::move(matrices));
 	pCamera->FitToBDB(BDB(vec3(0), vec3(range, range, range)));
 	
