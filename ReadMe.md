@@ -12,6 +12,9 @@ It's implemented draw call.
 * glMultiDrawElementsIndirect
 * glDrawElementsIndirect 
 
+## Image
+![image](https://github.com/slothgreed/GLDrawCall/blob/master/drawCall.png)
+
 ## Requirement
 glew-2.1.0
 glfw-3.3
