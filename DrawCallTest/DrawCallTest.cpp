@@ -168,11 +168,13 @@ void DrawCallTest::Execute(const TestArgs& args)
 
 	int range = args.Range();
 	Primitives primitives;
-	primitives.push_back(std::make_unique<Cone>(0.1f, 0.1f, 16));
+	primitives.push_back(std::make_unique<Cone>(0.1f, 0.1f, 32));
 	primitives.push_back(std::make_unique<Cube>(glm::vec3(-0.1f), vec3(0.1f)));
-	primitives.push_back(std::make_unique<Cylinder>(0.1f, 0.1f, 0.1f, 16));
-	primitives.push_back(std::make_unique<Sphere>(0.1f, 16, 16));
-	primitives.push_back(std::make_unique<Torus>(0.05f, 0.1f, 16, 16));
+	primitives.push_back(std::make_unique<Cylinder>(0.1f, 0.1f, 0.1f, 32));
+	primitives.push_back(std::make_unique<Sphere>(0.1f, 32, 32));
+	primitives.push_back(std::make_unique<Torus>(0.05f, 0.1f, 32, 32));
+
+
 
 	GLuint VertexArrayID;
 	glGenVertexArrays(1, &VertexArrayID);
@@ -204,6 +206,15 @@ void DrawCallTest::Execute(const TestArgs& args)
 
 	std::vector<glm::mat4x4> matrices;
 	CreateMatrix(range, matrices);
+
+	unsigned long int triangleNum = 0;
+	for (int i = 0; i < primitives.size(); i++)
+	{
+		triangleNum += primitives[i]->GetTriangleNum();
+	}
+	triangleNum = triangleNum * range * range * (range / 5);
+	printf("Triangle Num %lu\n", triangleNum);
+
 	drawer->BuildRenderItem(primitives, std::move(matrices));
 	pCamera->FitToBDB(BDB(vec3(0), vec3(range, range, range)));
 	

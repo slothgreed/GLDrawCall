@@ -11,11 +11,11 @@ InstanceShader::~InstanceShader()
 
 std::string InstanceShader::GetVertexPath()
 {
-	return  "E:\\MyProgram\\KIProject\\GLDrawCall\\DrawCallTest\\Shader\\instance.vert";
+	return  ".\\Shader\\instance.vert";
 }
 std::string InstanceShader::GetFragmentPath()
 {
-	return "E:\\MyProgram\\KIProject\\GLDrawCall\\DrawCallTest\\Shader\\instance.frag";
+	return ".\\Shader\\instance.frag";
 }
 void InstanceShader::GetUniformLocation()
 {
