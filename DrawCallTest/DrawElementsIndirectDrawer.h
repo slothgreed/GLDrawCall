@@ -2,7 +2,7 @@
 #define DRAW_ELEMENT_INDIRECT_DRAWER_H
 #include "IDrawer.h"
 #include "InstanceShader.h"
-
+#include "MultiRenderItem.h"
 struct DrawElementsIndirectCommand
 {
 	unsigned int count;
@@ -24,7 +24,7 @@ public:
 private:
 
 	std::unique_ptr<InstanceShader> m_pShader;
-
+	std::unique_ptr<MultiRenderItem> m_pRenderItem;
 	GLuint m_indirectBuffer;
 	std::vector<DrawElementsIndirectCommand> m_commands;
 };

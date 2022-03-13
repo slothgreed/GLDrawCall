@@ -14,8 +14,8 @@ DrawElementsIndirectDrawer::~DrawElementsIndirectDrawer()
 void DrawElementsIndirectDrawer::BuildRenderItem(const Primitives& pPrimitives, std::vector<mat4x4>&& matrixs)
 {
 
-	auto pItem = std::make_unique<MultiRenderItem>(pPrimitives, true);
-	pItem->SetMatrixs(matrixs);
+	m_pRenderItem = std::make_unique<MultiRenderItem>(pPrimitives, true);
+	m_pRenderItem->SetMatrixs(matrixs);
 
 	std::vector<std::shared_ptr<IPrimitive>> pPrimitive;
 	m_commands.resize(matrixs.size());
@@ -24,10 +24,10 @@ void DrawElementsIndirectDrawer::BuildRenderItem(const Primitives& pPrimitives, 
 	{
 		for (int j = 0; j < pPrimitives.size(); j++)
 		{
-			m_commands[num].count = pItem->IndexNum()[j];
+			m_commands[num].count = m_pRenderItem->IndexNum()[j];
 			m_commands[num].instanceCount = 1;
-			m_commands[num].firstIndex = pItem->FirstIndex()[j];
-			m_commands[num].baseVertex = pItem->BaseVertex()[j];
+			m_commands[num].firstIndex = m_pRenderItem->FirstIndex()[j];
+			m_commands[num].baseVertex = m_pRenderItem->BaseVertex()[j];
 			m_commands[num].baseInstance = num;
 			num++;
 		}
@@ -54,12 +54,12 @@ void DrawElementsIndirectDrawer::BuildRenderItem(const Primitives& pPrimitives, 
 	glVertexAttribIFormat(ATTRIB_MATRIX, 1, GL_INT, 0);
 	OUTPUT_GLERROR;
 
-	glBindVertexBuffer(ATTRIB_POSITION, pItem->PositionBuffer()->GetId(), 0, sizeof(glm::vec3));
-	glBindVertexBuffer(ATTRIB_NORMAL, pItem->NormalBuffer()->GetId(), 0, sizeof(glm::vec3));
-	glBindVertexBuffer(ATTRIB_MATRIX, pItem->MatrixIndexBuffer()->GetId(), 0, sizeof(int));
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, pItem->IndexBuffer()->GetId());
+	glBindVertexBuffer(ATTRIB_POSITION, m_pRenderItem->PositionBuffer()->GetId(), 0, sizeof(glm::vec3));
+	glBindVertexBuffer(ATTRIB_NORMAL, m_pRenderItem->NormalBuffer()->GetId(), 0, sizeof(glm::vec3));
+	glBindVertexBuffer(ATTRIB_MATRIX, m_pRenderItem->MatrixIndexBuffer()->GetId(), 0, sizeof(int));
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_pRenderItem->IndexBuffer()->GetId());
 
-	m_pShader->SetModelBuffer(pItem->MatrixBuffer());
+	m_pShader->SetModelBuffer(m_pRenderItem->MatrixBuffer());
 	OUTPUT_GLERROR;
 }
 
