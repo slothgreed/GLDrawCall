@@ -9,8 +9,8 @@ It's implemented draw call.
 * glMultiDrawElements 
 * glMultiDrawElementsBaseVertex
 * glDrawElementsInstanced
-* glMultiDrawElementsIndirect
 * glDrawElementsIndirect 
+* glMultiDrawElementsIndirect
 
 ## Image
 ![image](https://github.com/slothgreed/GLDrawCall/blob/master/drawCall.png)
