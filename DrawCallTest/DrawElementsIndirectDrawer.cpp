@@ -1,8 +1,9 @@
 #include "DrawElementsIndirectDrawer.h"
 #include "MultiRenderItem.h"
 #include "InstanceShader.h"
-DrawElementsIndirectDrawer::DrawElementsIndirectDrawer()
-	:m_pShader(std::make_unique<InstanceShader>())
+DrawElementsIndirectDrawer::DrawElementsIndirectDrawer(bool multi)
+	: m_pShader(std::make_unique<InstanceShader>())
+	, m_multiDraw(multi)
 {
 	m_pShader->Build();
 }
@@ -70,14 +71,17 @@ void DrawElementsIndirectDrawer::Draw(const mat4x4& proj, const mat4x4& view)
 
 	glBindBuffer(GL_DRAW_INDIRECT_BUFFER, m_indirectBuffer);
 
-	glMultiDrawElementsIndirect(GL_TRIANGLES, GL_UNSIGNED_INT, 0, m_commands.size(), 0);
-
-	/*
-	for (int i = 0; i < m_commands.size(); i++)
+	if (m_multiDraw)
 	{
-		glDrawElementsIndirect(GL_TRIANGLES, GL_UNSIGNED_INT, (void*)(sizeof(DrawElementsIndirectCommand) * i));
+		glMultiDrawElementsIndirect(GL_TRIANGLES, GL_UNSIGNED_INT, 0, m_commands.size(), 0);
 	}
-	*/
+	else
+	{
+		for (int i = 0; i < m_commands.size(); i++)
+		{
+			glDrawElementsIndirect(GL_TRIANGLES, GL_UNSIGNED_INT, (void*)(sizeof(DrawElementsIndirectCommand) * i));
+		}
+	}
 
 	glBindBuffer(GL_DRAW_INDIRECT_BUFFER, 0);
 }

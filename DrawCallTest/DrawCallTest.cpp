@@ -201,13 +201,19 @@ void DrawCallTest::Execute(const TestArgs& args)
 		drawer = std::make_unique<DrawElementsDrawer>();
 		break;
 	case DRAWER_MULTI_DRAW_ELEMENT:
-		drawer = std::make_unique<MultiDrawElementsDrawer>();
+		drawer = std::make_unique<MultiDrawElementsDrawer>(false);
+		break;
+	case DRAWER_MULTI_DRAW_ELEMENT_BASE_VERTEX:
+		drawer = std::make_unique<MultiDrawElementsDrawer>(true);
 		break;
 	case DRAWER_DRAW_ELEMENTS_INSTANCED:
 		drawer = std::make_unique<DrawElementsInstancedDrawer>();
 		break;
 	case DRAWER_DRAW_ELEMENTS_INDIRECT:
-		drawer = std::make_unique<DrawElementsIndirectDrawer>();
+		drawer = std::make_unique<DrawElementsIndirectDrawer>(false);
+		break;
+	case DRAWER_MULTI_DRAW_ELEMENTS_INDIRECT:
+		drawer = std::make_unique<DrawElementsIndirectDrawer>(true);
 		break;
 	default:
 		assert(0);

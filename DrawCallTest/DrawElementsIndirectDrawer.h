@@ -15,14 +15,14 @@ struct DrawElementsIndirectCommand
 class DrawElementsIndirectDrawer : public IDrawer
 {
 public:
-	DrawElementsIndirectDrawer();
+	DrawElementsIndirectDrawer(bool multi);
 	~DrawElementsIndirectDrawer();
 
 	virtual void BuildRenderItem(const Primitives& pPrimitive, std::vector<mat4x4>&& matrixs) override;
 	virtual void Draw(const mat4x4& proj, const mat4x4& view) override;
 
 private:
-
+	bool m_multiDraw;
 	std::unique_ptr<InstanceShader> m_pShader;
 	std::unique_ptr<MultiRenderItem> m_pRenderItem;
 	GLuint m_indirectBuffer;

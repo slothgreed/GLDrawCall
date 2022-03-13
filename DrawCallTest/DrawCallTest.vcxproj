@@ -106,13 +106,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>E:\Tools\glfw-3.3.bin.WIN64\include;E:\Tools\glew-2.1.0-win32\glew-2.1.0\include;E:\MyProgram\KIProject\CGALRenderer\extlibs\glm-0.9.9.6\glm</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\extlibs\glfw-3.3.bin.WIN64\include;$(SolutionDir)\extlibs\glew-2.1.0\include;$(SolutionDir)\extlibs\glm-0.9.9.6\glm</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>pch.h</ForcedIncludeFiles>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>E:\Tools\glfw-3.3.bin.WIN64\lib-vc2015;E:\Tools\glew-2.1.0-win32\glew-2.1.0\lib\Release\x64</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)\extlibs\glfw-3.3.bin.WIN64\lib-vc2015;$(SolutionDir)\extlibs\glew-2.1.0\lib\Release\x64</AdditionalLibraryDirectories>
       <AdditionalDependencies>glfw3.lib;glew32.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -146,7 +146,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>E:\Tools\glfw-3.3.bin.WIN64\include;E:\Tools\glew-2.1.0-win32\glew-2.1.0\include;E:\MyProgram\KIProject\CGALRenderer\extlibs\glm-0.9.9.6\glm</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\extlibs\glfw-3.3.bin.WIN64\include;$(SolutionDir)\extlibs\glew-2.1.0\include;$(SolutionDir)\extlibs\glm-0.9.9.6\glm</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>pch.h</ForcedIncludeFiles>
     </ClCompile>
     <Link>
@@ -154,7 +154,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>E:\Tools\glfw-3.3.bin.WIN64\lib-vc2015;E:\Tools\glew-2.1.0-win32\glew-2.1.0\lib\Release\x64</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)\extlibs\glfw-3.3.bin.WIN64\lib-vc2015;$(SolutionDir)\extlibs\glew-2.1.0\lib\Release\x64</AdditionalLibraryDirectories>
       <AdditionalDependencies>glfw3.lib;glew32.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>

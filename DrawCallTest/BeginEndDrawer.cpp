@@ -19,7 +19,6 @@ void BeginEndDrawer::Draw(const mat4x4& proj, const mat4x4& view)
 	glLoadIdentity();
 	glMultMatrixf(&(proj*view)[0][0]);
 	
-
 	glMatrixMode(GL_MODELVIEW);
 	OUTPUT_GLERROR;
 	int num = 0;
@@ -30,7 +29,6 @@ void BeginEndDrawer::Draw(const mat4x4& proj, const mat4x4& view)
 			glLoadIdentity();
 			glMultMatrixf(&(m_matrix[num++][0][0]));
 			glBegin(GL_TRIANGLES);
-			OUTPUT_GLERROR;
 			for (int j = 0; j < m_pPrimitives[i]->Index().size(); j++)
 			{
 				int index = m_pPrimitives[i]->Index()[j];

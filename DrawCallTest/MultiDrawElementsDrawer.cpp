@@ -1,7 +1,8 @@
 #include "MultiDrawElementsDrawer.h"
 
-MultiDrawElementsDrawer::MultiDrawElementsDrawer()
-	:m_pShader(std::make_unique<SimpleShader>())
+MultiDrawElementsDrawer::MultiDrawElementsDrawer(bool useBaseVertex)
+	: m_pShader(std::make_unique<SimpleShader>())
+	, m_useBaseVertex(useBaseVertex)
 {
 	m_pShader->Build();
 }
@@ -22,7 +23,7 @@ void MultiDrawElementsDrawer::BuildRenderItem(const Primitives& pPrimitives, std
 			primitive->Multi(matrixs[num++]);
 			primitives[j] = primitive;
 		}
-		m_pRenderItem.push_back(std::make_unique<MultiRenderItem>(primitives, false));
+		m_pRenderItem.push_back(std::make_unique<MultiRenderItem>(primitives, m_useBaseVertex));
 	}
 
 	m_pShader->Use();
